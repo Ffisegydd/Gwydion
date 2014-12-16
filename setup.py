@@ -1,4 +1,5 @@
 import re
+import os
 
 from setuptools import setup
 
@@ -36,7 +37,6 @@ classifiers = ['Development Status :: 3 - Alpha',
 
 setup(
       name='Gwydion',
-      version='',
       packages=[package_name],
       url='https://github.com/Ffisegydd/Gwydion',
       # download_url='https://github.com/Ffisegydd/Gwydion/releases/tag/0.1dev',
