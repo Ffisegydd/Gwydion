@@ -36,7 +36,7 @@ classifiers = ['Development Status :: 3 - Alpha',
                ]
 
 setup(
-      name='Gwydion',
+      name=package_name,
       packages=[package_name],
       url='https://github.com/Ffisegydd/Gwydion',
       # download_url='https://github.com/Ffisegydd/Gwydion/releases/tag/0.1dev',
