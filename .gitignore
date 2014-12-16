@@ -52,6 +52,8 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+.pypirc
+
 ### OSX.gitignore
 
 .DS_Store
