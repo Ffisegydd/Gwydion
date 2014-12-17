@@ -19,11 +19,12 @@ class Base(ABC):
 
         self.xlim = xlim
 
-        self._random_functions = dict(linear=np.random.random,
-                                      normal=np.random.randn)
+        self._random_functions = {'linear':np.random.random,
+                                  'normal':np.random.randn,
+                                  'none':None}
 
         if isinstance(rand_func, str):
-            self.rand_func = self._random_functions[rand_func]
+            self.rand_func = self._random_functions[rand_func.lower()]
         else:
             self.rand_func = rand_func
 
@@ -31,7 +32,14 @@ class Base(ABC):
 
     @property
     def r(self):
-        return self.rand_factor*((2*self.rand_func(self.N)) - 1) + 1
+        # return self.rand_factor*((2*self.rand_func(self.N)) - 1) + 1
+
+        if self.rand_func is None:
+            return np.zeros(self.N)
+
+        if self.rand_func == np.random.random:
+            return self.rand_factor*((2*self.rand_func(self.N)) - 1) + 1
+
 
     @abstractmethod
     def data(self):
