@@ -1,11 +1,10 @@
 from .base import random, np, plt, Base
 
-
-class Exponential(Base):
+class Logarithm(Base):
     """
     Exponential function (power law). Returned function is
 
-        y = a * base**(b*x + c) + d
+        y = a * log(base)(b*x + c) + d
 
     Parameters
     ----------
@@ -17,11 +16,11 @@ class Exponential(Base):
     a : Float, integer, or None.
         Amplitude of function. If None, defaults to a random value around 1.0.
     b : Float, integer, or None.
-        Amplitude of the exponent. If None, defaults to a random value around 0.0
+        Amplitude of the argument. If none, defaults to a random value around 0.0.
     c : Float, integer, or None.
-        Constant for the exponent. If None, defaults to a random value around 0.0.
+        x offset. If None, defaults to a random value around 0.0.
     d : Float, integer, or None.
-        Offset of exponent. If None, defaults to a random value around 0.0.
+        y offset. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
     rand : Boolean.
@@ -34,16 +33,15 @@ class Exponential(Base):
     Examples
     --------
 
-    >>>> exp = Exponential()  # Default params, returns a "normal" exponential.
-    >>>> exp = Exponential(N=1000)  # Increase the number of data points.
-    >>>> exp = Exponential(b=-1, c=0)  # Exponential decay.
-    >>>> exp = Exponential(rand=False)  # Turn off randomness.
-    >>>> exp = Exponential(seed=1234)  # Seeded RNG
+    >>>> log = Logarithm()  # Default params, returns a "normal" exponential.
+    >>>> log = Logarithm(N=1000)  # Increase the number of data points.
+    >>>> log = Logarithm(a=2, c=0)  # Exponential decay.
+    >>>> log = Logarithm(rand=False)  # Turn off randomness.
+    >>>> log = Logarithm(seed=1234)  # Seeded RNG
 
     """
 
-    def __init__(self, N=100, base=None, a=None, b=None, c=None,
-                 d=None, xlim=(-10, 10), rand=True, rand_factor=0.1, seed=None):
+    def __init__(self, N=100, base=None, a=None, b=None, c=None, d=None, xlim=(-10,10), rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
                          rand=rand,
@@ -58,7 +56,7 @@ class Exponential(Base):
                     'a': 1.0 + (random.random() - 0.5) * 0.5,
                     'b': (random.random() - 0.5) * 0.5,
                     'c': (random.random() - 0.5) * 0.5,
-                    'd': random.random() - 0.5}
+                    'd': (random.random() - 0.5) * 0.5}
 
         for key, val in defaults.items():
             if locals()[key] is None:
@@ -67,6 +65,6 @@ class Exponential(Base):
                 setattr(self, key, locals()[key])
 
     def func(self, x):
-        a, b, c, d, base = self.a, self.b, self.c, self.d, self.base
+        base, a, b, c, d = self.base, self.a, self.b, self.c, self.d
 
-        return a * np.power(base, self.b * x + self.c) + self.d
+        return (a*np.log(b*x + c)/np.log(base)) + d
