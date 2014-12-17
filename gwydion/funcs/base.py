@@ -4,6 +4,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class Base(ABC):
     """
     Base ABC object to be subclassed in making Gwydion classes.
@@ -45,14 +46,14 @@ class Base(ABC):
     @property
     def r(self):
 
-        return self.rand_factor*(2*np.random.random(self.N) - 1)
+        return self.rand_factor * (2 * np.random.random(self.N) - 1)
 
     @property
     def data(self):
         x = np.linspace(*self.xlim, num=self.N)
         y = self.func(x)
         r = self.r
-        return (x, y + r)
+        return x, y + r
 
     def plot(self, *args, ax=None, **kwargs):
         x, y = self.data

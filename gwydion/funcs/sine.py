@@ -1,5 +1,6 @@
 from .base import random, np, Base
 
+
 class Sine(Base):
     """
     Sine wave function. Returned function is
@@ -30,14 +31,13 @@ class Sine(Base):
     Examples
     --------
 
-    >>>> sin = Sine() # Default params.
-    >>>> sin = Sine(N=1000) # Increase the number of data points.
-    >>>> sin = Sine(a=0.1, d=1.0) # Modify the function parameters.
-    >>>> sin = Sine(rand=False) # Turn off randomness.
-    >>>> sin = Sine(seed=1234) # Seeded RNG
+    >>>> sin = Sine()  # Default params.
+    >>>> sin = Sine(N=1000)  # Increase the number of data points.
+    >>>> sin = Sine(a=0.1, d=1.0)  # Modify the function parameters.
+    >>>> sin = Sine(rand=False)  # Turn off randomness.
+    >>>> sin = Sine(seed=1234)  # Seeded RNG
 
     """
-
 
     def __init__(self, N=100, a=None, b=None, c=None, d=None, xlim=(-10, 10), rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
@@ -48,13 +48,12 @@ class Sine(Base):
 
         self.set_variables(a, b, c, d)
 
-
     def set_variables(self, a, b, c, d):
 
-        defaults = {'a':1.0 + (random.random() - 0.5) * 0.5,
-                    'b':2.0*np.pi * (random.random() + 0.5),
-                    'c':(random.random() - 0.5) * 0.5,
-                    'd':random.random() - 0.5}
+        defaults = {'a': 1.0 + (random.random() - 0.5) * 0.5,
+                    'b': 2.0 * np.pi * (random.random() + 0.5),
+                    'c': (random.random() - 0.5) * 0.5,
+                    'd': random.random() - 0.5}
 
         for key, val in defaults.items():
             if locals()[key] is None:
@@ -62,8 +61,7 @@ class Sine(Base):
             else:
                 setattr(self, key, locals()[key])
 
-
     def func(self, x):
         a, b, c, d = self.a, self.b, self.c, self.d
 
-        return a*np.sin(b*x + c) + d
+        return a * np.sin(b * x + c) + d

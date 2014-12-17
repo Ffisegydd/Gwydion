@@ -1,5 +1,6 @@
 from .base import random, np, plt, Base
 
+
 class Exponential(Base):
     """
     Exponential function (power law). Returned function is
@@ -33,16 +34,16 @@ class Exponential(Base):
     Examples
     --------
 
-    >>>> exp = Exponential() # Default params, returns a "normal" exponential.
-    >>>> exp = Exponential(N=1000) # Increase the number of data points.
-    >>>> exp = Exponential(b=-np.e, c=0) # Exponential decay.
-    >>>> exp = Exponential(rand=False) # Turn off randomness.
-    >>>> exp = Exponential(seed=1234) # Seeded RNG
+    >>>> exp = Exponential()  # Default params, returns a "normal" exponential.
+    >>>> exp = Exponential(N=1000)  # Increase the number of data points.
+    >>>> exp = Exponential(b=-np.e, c=0)  # Exponential decay.
+    >>>> exp = Exponential(rand=False)  # Turn off randomness.
+    >>>> exp = Exponential(seed=1234)  # Seeded RNG
 
     """
 
     def __init__(self, N=100, base=None, a=None, b=None, c=None,
-                 d=None, xlim=(-10,10), rand=True, rand_factor=0.1, seed=None):
+                 d=None, xlim=(-10, 10), rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
                          rand=rand,
@@ -53,11 +54,11 @@ class Exponential(Base):
 
     def set_variables(self, base, a, b, c, d):
 
-        defaults = {'base':np.e,
-                    'a':1.0 + (random.random() - 0.5) * 0.5,
-                    'b':(random.random()-0.5) * 0.5,
-                    'c':(random.random() - 0.5) * 0.5,
-                    'd':random.random() - 0.5}
+        defaults = {'base': np.e,
+                    'a': 1.0 + (random.random() - 0.5) * 0.5,
+                    'b': (random.random() - 0.5) * 0.5,
+                    'c': (random.random() - 0.5) * 0.5,
+                    'd': random.random() - 0.5}
 
         for key, val in defaults.items():
             if locals()[key] is None:
@@ -68,4 +69,4 @@ class Exponential(Base):
     def func(self, x):
         a, b, c, d, base = self.a, self.b, self.c, self.d, self.base
 
-        return a * np.power(base, self.b*x + self.c) + self.d
+        return a * np.power(base, self.b * x + self.c) + self.d
