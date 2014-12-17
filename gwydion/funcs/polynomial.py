@@ -42,9 +42,8 @@ class Polynomial(Base):
 
         self.set_variables(a)
 
-    def set_variables(self, a):
 
-        # self.c = (random.random() - 0.5)*10
+    def set_variables(self, a):
 
         if a is None:
             n = random.randint(2, 3)
@@ -53,6 +52,7 @@ class Polynomial(Base):
             self.a = a
 
         self.params = self.a
+
 
     def func(self, x):
         y = sum([v*np.power(x, i) for i, v in enumerate(self.a)])
