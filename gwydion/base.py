@@ -32,6 +32,10 @@ class Base(ABC):
     def data(self):
         pass
 
+    @abstractmethod
+    def func(self):
+        pass
+
     def plot(self, *args, **kwargs):
         x, y = self.data
 
