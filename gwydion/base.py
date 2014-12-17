@@ -8,7 +8,7 @@ class Base(ABC):
     """Base ABC object to be subclassed in making functions.
     """
 
-    def __init__(self, N, seed, xlim, rand_func, rand_factor):
+    def __init__(self, N, seed, xlim, rand, rand_factor):
         super().__init__()
 
         self.N = N
@@ -19,26 +19,17 @@ class Base(ABC):
 
         self.xlim = xlim
 
-        self._random_functions = {'linear':np.random.random,
-                                  'normal':np.random.randn,
-                                  'none':None}
+        self.rand = rand
 
-        if isinstance(rand_func, str):
-            self.rand_func = self._random_functions[rand_func.lower()]
+        if self.rand:
+            self.rand_factor = rand_factor
         else:
-            self.rand_func = rand_func
-
-        self.rand_factor = rand_factor
+            self.rand = 0
 
     @property
     def r(self):
-        # return self.rand_factor*((2*self.rand_func(self.N)) - 1) + 1
 
-        if self.rand_func is None:
-            return np.zeros(self.N)
-
-        if self.rand_func == np.random.random:
-            return self.rand_factor*((2*self.rand_func(self.N)) - 1) + 1
+        return self.rand_factor*(2*np.random.random(self.N) - 1)
 
 
     @abstractmethod
@@ -49,10 +40,12 @@ class Base(ABC):
     def func(self):
         pass
 
-    def plot(self, *args, **kwargs):
+    def plot(self, *args, ax=None, **kwargs):
         x, y = self.data
 
-        fig, ax = plt.subplots()
+        if ax is None:
+            fig, ax = plt.subplots()
+
         ax.plot(x, y, *args, **kwargs)
 
         return ax

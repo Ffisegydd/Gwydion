@@ -3,8 +3,12 @@ from .base import random, np, plt, Base
 class Linear(Base):
     """Linear function
     """
-    def __init__(self, N=100, m=None, c=None, xlim=(0,10), rand_func='linear', rand_factor=0.05, seed=None):
-        super().__init__(N, seed, xlim, rand_func, rand_factor)
+    def __init__(self, N=100, m=None, c=None, xlim=(0,10), rand=True, rand_factor=0.5, seed=None):
+        super().__init__(N=N,
+                         seed=seed,
+                         xlim=xlim,
+                         rand=rand,
+                         rand_factor=rand_factor)
 
         self.randomise_variables(m, c)
 
@@ -35,4 +39,4 @@ class Linear(Base):
         x = np.linspace(*self.xlim, num=self.N)
         y = self.func(x)
         r = self.r
-        return (x, y*r)
+        return (x, y + r)
