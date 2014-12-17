@@ -5,7 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class Base(ABC):
-    """Base ABC object to be subclassed in making functions.
+    """
+    Base ABC object to be subclassed in making functions.
     """
 
     def __init__(self, N, seed, xlim, rand, rand_factor):
