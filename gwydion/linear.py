@@ -8,8 +8,9 @@ class Linear(Base):
 
     Parameters
     ----------
-    N : Integer
-        Length of arrays to be returned via the data method.
+
+    N : Integer.
+        Length of arrays to be returned via the data method. Defaults to 100.
     m : Float, integer, or None (default).
         Gradient of straight line function. If None, defaults to a randomised "typical" value.
     c : Float, integer, or None (default).
@@ -25,6 +26,7 @@ class Linear(Base):
 
     Examples
     --------
+
     >>>> linear = Linear() # Default params, returns a "normal" straight line.
     >>>> linear = Linear(N=1000) # Increase the number of data points.
     >>>> linear = Linear(m=0, c=0) # Horizontal line with randomness
