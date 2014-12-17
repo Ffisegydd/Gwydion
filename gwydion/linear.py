@@ -9,7 +9,7 @@ class Linear(Base):
     Parameters
     ----------
     N : Integer
-        Length of arrays to be returned via the data method
+        Length of arrays to be returned via the data method.
     m : Float, integer, or None (default).
         Gradient of straight line function. If None, defaults to a randomised "typical" value.
     c : Float, integer, or None (default).
@@ -34,10 +34,10 @@ class Linear(Base):
 
     def __init__(self, N=100, m=None, c=None, xlim=(0,10), rand=True, rand_factor=0.5, seed=None):
         super().__init__(N=N,
-                         seed=seed,
                          xlim=xlim,
                          rand=rand,
-                         rand_factor=rand_factor)
+                         rand_factor=rand_factor,
+                         seed=seed)
 
         self.randomise_variables(m, c)
 

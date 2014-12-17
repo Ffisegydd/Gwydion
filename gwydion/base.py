@@ -6,10 +6,25 @@ import matplotlib.pyplot as plt
 
 class Base(ABC):
     """
-    Base ABC object to be subclassed in making functions.
+    Base ABC object to be subclassed in making Gwydion classes.
+
+    Cannot be used as a class by itself, must be subclassed.
+
+    Parameters
+    ----------
+    N : Integer
+        Length of arrays to be returned via the data method.
+    xlim : Tuple of floats or integers.
+        (Min, Max) values for the x-data.
+    rand : Boolean.
+        Choose whether the y values should have some random numbers added to them. Defaults to True.
+    rand_factor : Float or integer.
+        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.5.
+    seed : Integer or None.
+        Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
     """
 
-    def __init__(self, N, seed, xlim, rand, rand_factor):
+    def __init__(self, N, xlim, rand, rand_factor, seed):
         super().__init__()
 
         self.N = N
