@@ -4,7 +4,7 @@ class Sine(Base):
     """
     Sine wave function. Returned function is
 
-        y = a*sin(b*t + c) + d
+        y = a*sin(b*x + c) + d
 
     Parameters
     ----------
@@ -23,25 +23,16 @@ class Sine(Base):
 
     def set_variables(self, a, b, c, d):
 
-        if a is None:
-            self.a = 1.0 + (random.random() - 0.5) * 0.5
-        else:
-            self.a = a
+        defaults = {'a':1.0 + (random.random() - 0.5) * 0.5,
+                    'b':2.0*np.pi * (random.random() + 0.5),
+                    'c':(random.random() - 0.5) * 0.5,
+                    'd':random.random() - 0.5}
 
-        if b is None:
-            self.b = 2.0*np.pi * (random.random() + 0.5)
-        else:
-            self.b = b
-
-        if c is None:
-            self.c = (random.random() - 0.5) * 0.5
-        else:
-            self.c = c
-
-        if d is None:
-            self.d = random.random() - 0.5
-        else:
-            self.d = d
+        for key, val in defaults.items():
+            if locals()[key] is None:
+                setattr(self, key, val)
+            else:
+                setattr(self, key, locals()[key])
 
 
     def func(self, x):
