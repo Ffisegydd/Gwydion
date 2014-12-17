@@ -39,10 +39,10 @@ class Linear(Base):
                          rand_factor=rand_factor,
                          seed=seed)
 
-        self.randomise_variables(m, c)
+        self.set_variables(m, c)
 
 
-    def randomise_variables(self, m, c):
+    def set_variables(self, m, c):
         if m is None:
             self.m = (random.random() + 0.5)*2
         else:
@@ -54,18 +54,8 @@ class Linear(Base):
             self.c = c
 
 
-    def func(self, x, m=None, c=None):
-        if m is None:
-            m = self.m
-        if c is None:
-            c = self.c
+    def func(self, x):
+        m = self.m
+        c = self.c
 
         return m*x + c
-
-
-    @property
-    def data(self):
-        x = np.linspace(*self.xlim, num=self.N)
-        y = self.func(x)
-        r = self.r
-        return (x, y + r)

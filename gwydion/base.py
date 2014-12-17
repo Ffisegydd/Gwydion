@@ -47,14 +47,12 @@ class Base(ABC):
 
         return self.rand_factor*(2*np.random.random(self.N) - 1)
 
-
-    @abstractmethod
+    @property
     def data(self):
-        pass
-
-    @abstractmethod
-    def func(self):
-        pass
+        x = np.linspace(*self.xlim, num=self.N)
+        y = self.func(x)
+        r = self.r
+        return (x, y + r)
 
     def plot(self, *args, ax=None, **kwargs):
         x, y = self.data
@@ -65,3 +63,11 @@ class Base(ABC):
         ax.plot(x, y, *args, **kwargs)
 
         return ax
+
+    @abstractmethod
+    def set_variables(self):
+        pass
+
+    @abstractmethod
+    def func(self):
+        pass
