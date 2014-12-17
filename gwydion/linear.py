@@ -1,4 +1,4 @@
-from .base import Base, np, plt
+from .base import random, np, plt, Base
 
 class Linear(Base):
     """Linear function
@@ -11,12 +11,12 @@ class Linear(Base):
 
     def randomise_variables(self, m, c):
         if m is None:
-            self.m = 0.5
+            self.m = (random.random() + 0.5)*2
         else:
             self.m = m
 
         if c is None:
-            self.c = 0
+            self.c = (random.random() - 0.5)*10
         else:
             self.c = c
 

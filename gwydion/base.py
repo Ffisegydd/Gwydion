@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import random
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,6 +15,7 @@ class Base(ABC):
 
         if seed is not None:
             np.random.seed(seed)
+            random.seed(seed)
 
         self.xlim = xlim
 
