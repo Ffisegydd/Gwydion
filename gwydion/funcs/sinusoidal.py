@@ -1,4 +1,4 @@
-from .base import random, np, plt, Base
+from .base import random, np, Base
 
 class Sine(Base):
     """
