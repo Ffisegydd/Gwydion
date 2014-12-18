@@ -41,22 +41,21 @@ class Logarithm(Base):
 
     """
 
-    def __init__(self, N=100, base=None, a=None, b=None, c=None, d=None, xlim=(-10,10), rand=True, rand_factor=0.1, seed=None):
+    def __init__(self, N=100, base=None, a=None, b=None, c=None, xlim=(-10,10), rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
                          rand=rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
-        self.set_variables(base, a, b, c, d)
+        self.set_variables(base, a, b, c)
 
-    def set_variables(self, base, a, b, c, d):
+    def set_variables(self, base, a, b, c):
 
         defaults = {'base': np.e,
                     'a': 1.0 + (random.random() - 0.5) * 0.5,
                     'b': (random.random() - 0.5) * 0.5,
-                    'c': (random.random() - 0.5) * 0.5,
-                    'd': (random.random() - 0.5) * 0.5}
+                    'c': (random.random() - 0.5) * 0.5}
 
         for key, val in defaults.items():
             if locals()[key] is None:
@@ -65,6 +64,6 @@ class Logarithm(Base):
                 setattr(self, key, locals()[key])
 
     def func(self, x):
-        base, a, b, c, d = self.base, self.a, self.b, self.c, self.d
+        base, a, b, c = self.base, self.a, self.b, self.c
 
-        return (a*np.log(b*x + c)/np.log(base)) + d
+        return (a*np.log(x + b)/np.log(base)) + c
