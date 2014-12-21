@@ -149,6 +149,8 @@ class Cubic(Polynomial):
 
         args = [i for i in [a, b, c, d] if i is not None] or None
 
+        print(vars(self))
+
         super().__init__(N=N,
                          a=args,
                          xlim=xlim,

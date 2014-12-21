@@ -7,7 +7,7 @@ from .funcs.logarithm import Logarithm
 from .funcs.polynomial import Polynomial, Quadratic, Cubic
 from .funcs.sine import Sine
 
-from array import RandomArray
+from .array import RandomArray
 
 __all__ = ['Cubic', 'Exponential', 'Gaussian', 'Linear', 'Logarithm',
            'Normal', 'Polynomial', 'Quadratic', 'RandomArray', 'Sine']

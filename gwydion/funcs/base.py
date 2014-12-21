@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from inspect import getfullargspec
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -65,3 +66,15 @@ class Base(ABC):
     @abstractmethod
     def func(self):
         pass
+
+    def __str__(self):
+        s = '<{s.__class__.__name__} : N={s.N}, add_rand={s.add_rand}, rand_factor={s.rand_factor}>'
+        return s.format(s=self)
+
+    def __repr__(self):
+        v = vars(self)
+        spec = getfullargspec(self.__class__)
+
+        s = '{}(' + ', '.join(['{}={}'.format(key, val) for key, val in v.items() if key in spec.args]) + ')'
+
+        return s.format(self.__class__.__name__)
