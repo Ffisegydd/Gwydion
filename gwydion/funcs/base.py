@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import random
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,28 +24,22 @@ class Base(ABC):
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
     """
 
-    def __init__(self, N, xlim, rand, rand_factor, seed):
+    def __init__(self, N, xlim, add_rand, rand_factor, seed):
         super().__init__()
 
         self.N = N
-
-        if seed is not None:
-            np.random.seed(seed)
-            random.seed(seed)
-
+        self.random = np.random.RandomState(seed)
         self.xlim = xlim
+        self.add_rand = add_rand
 
-        self.rand = rand
-
-        if self.rand:
+        if self.add_rand:
             self.rand_factor = rand_factor
         else:
-            self.rand = 0
+            self.rand_factor = 0
 
     @property
     def r(self):
-
-        return self.rand_factor * (2 * np.random.random(self.N) - 1)
+        return self.rand_factor * (2 * self.random.rand(self.N) - 1)
 
     @property
     def data(self):

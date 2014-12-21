@@ -1,4 +1,4 @@
-from .base import random, np, plt, Base
+from .base import np, Base
 
 
 class Exponential(Base):
@@ -32,18 +32,18 @@ class Exponential(Base):
     Examples
     --------
 
-    >>>> exp = Exponential()  # Default params, returns a "normal" exponential.
-    >>>> exp = Exponential(N=1000)  # Increase the number of data points.
-    >>>> exp = Exponential(b=-1, c=0)  # Exponential decay.
-    >>>> exp = Exponential(rand=False)  # Turn off randomness.
-    >>>> exp = Exponential(seed=1234)  # Seeded RNG
+    >>>> Exponential()  # Default params, returns a "normal" exponential.
+    >>>> Exponential(N=1000)  # Increase the number of data points.
+    >>>> Exponential(b=-1, c=0)  # Exponential decay.
+    >>>> Exponential(rand=False)  # Turn off randomness.
+    >>>> Exponential(seed=1234)  # Seeded RNG
 
     """
 
-    def __init__(self, N=100, base=None, a=None, b=None, c=None, xlim=(-10, 10), rand=True, rand_factor=0.1, seed=None):
+    def __init__(self, N=100, base=None, a=None, b=None, c=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand=rand,
+                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
@@ -52,9 +52,9 @@ class Exponential(Base):
     def set_variables(self, base, a, b, c):
 
         defaults = {'base': np.e,
-                    'a': 1.0 + (random.random() - 0.5) * 0.5,
-                    'b': (random.random() - 0.5) * 0.5,
-                    'c': (random.random() - 0.5) * 0.5}
+                    'a': 1.0 + (self.random.rand() - 0.5) * 0.5,
+                    'b': (self.random.rand() - 0.5) * 0.5,
+                    'c': (self.random.rand() - 0.5) * 0.5}
 
         for key, val in defaults.items():
             if locals()[key] is None:

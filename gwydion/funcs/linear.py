@@ -1,4 +1,4 @@
-from .base import random, Base
+from .base import Base
 
 
 class Linear(Base):
@@ -28,17 +28,17 @@ class Linear(Base):
     Examples
     --------
 
-    >>>> linear = Linear()  # Default params, returns a "normal" straight line.
-    >>>> linear = Linear(N=1000)  # Increase the number of data points.
-    >>>> linear = Linear(m=0, c=0)  # Horizontal line with randomness
-    >>>> linear = Linear(rand=False)  # Turn off randomness.
-    >>>> linear = Linear(seed=1234)  # Seeded RNG
+    >>>> Linear()  # Default params, returns a "normal" straight line.
+    >>>> Linear(N=1000)  # Increase the number of data points.
+    >>>> Linear(m=0, c=0)  # Horizontal line with randomness
+    >>>> Linear(rand=False)  # Turn off randomness.
+    >>>> Linear(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, m=None, c=None, xlim=(0, 10), rand=True, rand_factor=0.5, seed=None):
+    def __init__(self, N=100, m=None, c=None, xlim=(0, 10), add_rand=True, rand_factor=0.5, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand=rand,
+                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
@@ -46,12 +46,12 @@ class Linear(Base):
 
     def set_variables(self, m, c):
         if m is None:
-            self.m = (random.random() + 0.5) * 2
+            self.m = (self.random.rand() + 0.5) * 2
         else:
             self.m = m
 
         if c is None:
-            self.c = (random.random() - 0.5) * 10
+            self.c = (self.random.rand() - 0.5) * 10
         else:
             self.c = c
 

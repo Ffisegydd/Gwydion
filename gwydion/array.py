@@ -1,9 +1,10 @@
 import numpy as np
 import random
 
+
 class _RandomArray(object):
 
-    def __init__(self, shape, lims=(0,10), seed=None):
+    def __init__(self, shape, lims=(0, 10), seed=None):
         super().__init__()
 
         if seed is not None:
@@ -32,7 +33,7 @@ class _RandomArray(object):
         return _RandomArray.interpolate(arr, *self.lims)
 
 
-def RandomArray(shape, lims=(0,10)):
-    arr = _RandomArray(shape, lims=lims)
+def RandomArray(shape, lims=(0, 10), seed=None):
+    arr = _RandomArray(shape, lims=lims, seed=seed)
 
     return arr.arr

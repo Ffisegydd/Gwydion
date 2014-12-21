@@ -1,7 +1,5 @@
 __version__ = '0.1dev'
 
-import numpy as np
-
 from .funcs.exponential import Exponential
 from .funcs.linear import Linear
 from .funcs.gaussian import Gaussian, Normal
@@ -11,4 +9,5 @@ from .funcs.sine import Sine
 
 from array import RandomArray
 
-__all__ = [Cubic, Exponential, Gaussian, Linear, Logarithm, Normal, Polynomial, Quadratic, RandomArray, Sine]
+__all__ = ['Cubic', 'Exponential', 'Gaussian', 'Linear', 'Logarithm',
+           'Normal', 'Polynomial', 'Quadratic', 'RandomArray', 'Sine']
