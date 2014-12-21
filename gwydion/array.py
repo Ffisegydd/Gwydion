@@ -1,3 +1,5 @@
+from inspect import getfullargspec
+
 import numpy as np
 import random
 
@@ -31,6 +33,18 @@ class _RandomArray(object):
     def arr(self):
         arr = np.random.random(self.shape)
         return _RandomArray.interpolate(arr, *self.lims)
+
+    def __str__(self):
+        s = '<{s.__class__.__name__} : shape={s.shape}, lims={s.lims}, seed={s.seed}>'
+        return s.format(s=self)
+
+    def __repr__(self):
+        v = vars(self)
+        spec = getfullargspec(self.__class__)
+
+        s = '{}(' + ', '.join(['{}={}'.format(key, val) for key, val in v.items() if key in spec.args]) + ')'
+
+        return s.format(self.__class__.__name__)
 
 
 def RandomArray(shape, lims=(0, 10), seed=None):

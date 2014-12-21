@@ -29,7 +29,8 @@ class Base(ABC):
         super().__init__()
 
         self.N = N
-        self.random = np.random.RandomState(seed)
+        self.seed = seed
+        self.random = np.random.RandomState(self.seed)
         self.xlim = xlim
         self.add_rand = add_rand
 
