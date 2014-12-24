@@ -1,4 +1,4 @@
-__version__ = '0.1dev'
+__version__ = '0.1.dev'
 
 from gwydion.funcs.exponential import Exponential
 from gwydion.funcs.linear import Linear

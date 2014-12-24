@@ -1,7 +1,7 @@
 import re
 import os
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 package_name = 'gwydion'
 
@@ -37,7 +37,7 @@ classifiers = ['Development Status :: 3 - Alpha',
 
 setup(
       name=package_name,
-      packages=[package_name],
+      packages=find_packages(),
       url='https://github.com/Ffisegydd/Gwydion',
       # download_url='https://github.com/Ffisegydd/Gwydion/releases/tag/0.1dev',
       license='MIT',
