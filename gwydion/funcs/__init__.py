@@ -1,5 +1,5 @@
-from .linear import Linear
-from .sine import Sine
-from .exponential import Exponential
-from .polynomial import Polynomial, Quadratic, Cubic
-from .logarithm import Logarithm
+from gwydion.funcs.linear import Linear
+from gwydion.funcs.sine import Sine
+from gwydion.funcs.exponential import Exponential
+from gwydion.funcs.polynomial import Polynomial, Quadratic, Cubic
+from gwydion.funcs.logarithm import Logarithm

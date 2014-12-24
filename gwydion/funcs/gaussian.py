@@ -1,4 +1,4 @@
-from .base import np, Base
+from gwydion.funcs.base import np, Base
 
 
 class Gaussian(Base):

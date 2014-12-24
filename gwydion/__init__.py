@@ -1,11 +1,11 @@
 __version__ = '0.1dev'
 
-from .funcs.exponential import Exponential
-from .funcs.linear import Linear
-from .funcs.gaussian import Gaussian, Normal
-from .funcs.logarithm import Logarithm
-from .funcs.polynomial import Polynomial, Quadratic, Cubic
-from .funcs.sine import Sine
+from gwydion.funcs.exponential import Exponential
+from gwydion.funcs.linear import Linear
+from gwydion.funcs.gaussian import Gaussian, Normal
+from gwydion.funcs.logarithm import Logarithm
+from gwydion.funcs.polynomial import Polynomial, Quadratic, Cubic
+from gwydion.funcs.sine import Sine
 
 from .random_array import RandomArray
 
