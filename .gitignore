@@ -134,3 +134,7 @@ crashlytics-build.properties
 ### dev.py
 
 dev.py
+
+### tox
+
+tox.ini
