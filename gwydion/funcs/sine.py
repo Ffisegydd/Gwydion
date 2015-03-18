@@ -5,20 +5,18 @@ class Sine(Base):
     """
     Sine wave function. Returned function is
 
-        y = a*sin(b*x + c) + d
+        y = A*sin(2*pi*f*x + p)
 
     Parameters
     ----------
     N : Integer
         Length of arrays to be returned via the data method. Defaults to 100.
-    a : Float, integer, or None.
+    A : Float, integer, or None.
         Amplitude of the sine wave. If None, defaults to a random value around 1.0.
-    b : Float, integer, or None.
-        Angular frequency of sine wave. If None, defaults to a random value around 2pi
-    c : Float, integer, or None.
+    f : Float, integer, or None.
+        Frequency of sine wave. If None, defaults to a random value around 2pi
+    p : Float, integer, or None.
         Phase of sine wave. If None, defaults to a random value around 0.0.
-    d : Float, integer, or None.
-        Offset of sine wave. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
     rand : Boolean.
@@ -39,21 +37,20 @@ class Sine(Base):
 
     """
 
-    def __init__(self, N=100, a=None, b=None, c=None, d=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
+    def __init__(self, N=100, A=None, f=None, p=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
                          add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
-        self.set_variables(a, b, c, d)
+        self.set_variables(A, f, p)
 
-    def set_variables(self, a, b, c, d):
+    def set_variables(self, A, f, p):
 
-        defaults = {'a': 1.0 + (self.random.rand() - 0.5) * 0.5,
-                    'b': 2.0 * np.pi * (self.random.rand() + 0.5),
-                    'c': (self.random.rand() - 0.5) * 0.5,
-                    'd': self.random.rand() - 0.5}
+        defaults = {'A': 1.0 + (self.random.rand() - 0.5) * 0.5,
+                    'f': self.random.rand() + 0.5,
+                    'p': (self.random.rand() - 0.5) * 0.5}
 
         for key, val in defaults.items():
             if locals()[key] is None:
@@ -62,6 +59,6 @@ class Sine(Base):
                 setattr(self, key, locals()[key])
 
     def func(self, x):
-        a, b, c, d = self.a, self.b, self.c, self.d
+        A, f, p = self.A, self.f, self.p
 
-        return a * np.sin(b * x + c) + d
+        return A * np.sin(2 * np.pi * f * x + p)
