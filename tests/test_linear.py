@@ -10,9 +10,6 @@ def test_linear_creation():
     linear = Linear()
     assert linear
 
-a = [None for i in range(5)]
-
-
 def test_linear_non_random():
     linear = Linear(add_rand=False, m=2.5, c=0, xlim=(0,5), N=6)
     x, y = linear.data

@@ -1,4 +1,4 @@
-from gwydion.funcs.base import np, Base
+from gwydion.base import np, Base
 
 
 class Logarithm(Base):

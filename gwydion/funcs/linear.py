@@ -1,4 +1,4 @@
-from gwydion.funcs.base import Base
+from gwydion.base import Base
 
 
 class Linear(Base):
