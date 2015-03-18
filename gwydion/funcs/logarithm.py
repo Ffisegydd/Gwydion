@@ -5,7 +5,7 @@ class Logarithm(Base):
     """
     Exponential function (power law). Returned function is
 
-        y = a * log(base)(b*x + c) + d
+        y = I * log(base)(k*x)
 
     Parameters
     ----------
@@ -14,14 +14,10 @@ class Logarithm(Base):
         Length of arrays to be returned via the data method. Defaults to 100.
     base : Float, integer, or None
         Base for function. If None, defaults to e = 2.718....
-    a : Float, integer, or None.
+    I : Float, integer, or None.
         Amplitude of function. If None, defaults to a random value around 1.0.
-    b : Float, integer, or None.
+    k : Float, integer, or None.
         Amplitude of the argument. If none, defaults to a random value around 0.0.
-    c : Float, integer, or None.
-        x offset. If None, defaults to a random value around 0.0.
-    d : Float, integer, or None.
-        y offset. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
     rand : Boolean.
@@ -36,27 +32,26 @@ class Logarithm(Base):
 
     >>>> Logarithm()  # Default params, returns a "normal" exponential.
     >>>> Logarithm(N=1000)  # Increase the number of data points.
-    >>>> Logarithm(a=2, c=0)  # Exponential decay.
+    >>>> Logarithm(I=2)  # Exponential decay.
     >>>> Logarithm(rand=False)  # Turn off randomness.
     >>>> Logarithm(seed=1234)  # Seeded RNG
 
     """
 
-    def __init__(self, N=100, base=None, a=None, b=None, c=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
+    def __init__(self, N=100, base=None, I=None, k=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
                          add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
-        self.set_variables(base, a, b, c)
+        self.set_variables(base, I, k)
 
-    def set_variables(self, base, a, b, c):
+    def set_variables(self, base, I, k):
 
         defaults = {'base': np.e,
-                    'a': 1.0 + (self.random.rand() - 0.5) * 0.5,
-                    'b': (self.random.rand() - 0.5) * 0.5,
-                    'c': (self.random.rand() - 0.5) * 0.5}
+                    'I': 1.0 + (self.random.rand() - 0.5) * 0.5,
+                    'k': (self.random.rand() - 0.5) * 0.5}
 
         for key, val in defaults.items():
             if locals()[key] is None:
@@ -65,6 +60,6 @@ class Logarithm(Base):
                 setattr(self, key, locals()[key])
 
     def func(self, x):
-        base, a, b, c = self.base, self.a, self.b, self.c
+        base, I, k = self.base, self.I, self.k
 
-        return (a*np.log(x + b)/np.log(base)) + c
+        return I*np.log(k*x)/np.log(base)

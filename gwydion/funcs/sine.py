@@ -11,8 +11,8 @@ class Sine(Base):
     ----------
     N : Integer
         Length of arrays to be returned via the data method. Defaults to 100.
-    A : Float, integer, or None.
-        Amplitude of the sine wave. If None, defaults to a random value around 1.0.
+    I : Float, integer, or None.
+        Intensity of the sine wave. If None, defaults to a random value around 1.0.
     f : Float, integer, or None.
         Frequency of sine wave. If None, defaults to a random value around 2pi
     p : Float, integer, or None.
@@ -31,24 +31,24 @@ class Sine(Base):
 
     >>>> Sine()  # Default params.
     >>>> Sine(N=1000)  # Increase the number of data points.
-    >>>> Sine(A=0.1, p=1.0)  # Modify the function parameters.
+    >>>> Sine(I=0.1, p=1.0)  # Modify the function parameters.
     >>>> Sine(rand=False)  # Turn off randomness.
     >>>> Sine(seed=1234)  # Seeded RNG
 
     """
 
-    def __init__(self, N=100, A=None, f=None, p=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
+    def __init__(self, N=100, I=None, f=None, p=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
                          add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
-        self.set_variables(A, f, p)
+        self.set_variables(I, f, p)
 
-    def set_variables(self, A, f, p):
+    def set_variables(self, I, f, p):
 
-        defaults = {'A': 1.0 + (self.random.rand() - 0.5) * 0.5,
+        defaults = {'I': 1.0 + (self.random.rand() - 0.5) * 0.5,
                     'f': self.random.rand() + 0.5,
                     'p': (self.random.rand() - 0.5) * 0.5}
 
@@ -59,6 +59,6 @@ class Sine(Base):
                 setattr(self, key, locals()[key])
 
     def func(self, x):
-        A, f, p = self.A, self.f, self.p
+        I, f, p = self.I, self.f, self.p
 
-        return A * np.sin(2 * np.pi * f * x + p)
+        return I * np.sin(2 * np.pi * f * x + p)
