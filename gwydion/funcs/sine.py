@@ -31,7 +31,7 @@ class Sine(Base):
 
     >>>> Sine()  # Default params.
     >>>> Sine(N=1000)  # Increase the number of data points.
-    >>>> Sine(a=0.1, d=1.0)  # Modify the function parameters.
+    >>>> Sine(A=0.1, p=1.0)  # Modify the function parameters.
     >>>> Sine(rand=False)  # Turn off randomness.
     >>>> Sine(seed=1234)  # Seeded RNG
 
