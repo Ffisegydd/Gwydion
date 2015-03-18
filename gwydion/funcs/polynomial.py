@@ -58,12 +58,12 @@ class Polynomial(Base):
         y = sum([v * np.power(x, i) for i, v in enumerate(self.a)])
         return y
 
-
+#TODO: Fix Quadratic and Cubic, MAJOR ISSUES. NO WORK.
 class Quadratic(Polynomial):
     """
     Quadratic function. Returned function is
 
-        y = a + b * x + c * x**2
+        y = a * x**2 + b * x + c
 
     Parameters
     ----------
@@ -71,11 +71,11 @@ class Quadratic(Polynomial):
     N : Integer.
         Length of arrays to be returned via the data method. Defaults to 100.
     a : Float or integer, or None
-        Polynomial constant term. If None, defaults to a small randomish value.
+        Polynomial quadratic term. If None, defaults to a small randomish value.
     b : Float or integer, or None
         Polynomial linear term. If None, defaults to a small randomish value.
     c : Float or integer, or None
-        Polynomial quadratic term. If None, defaults to a small randomish value.
+        Polynomial linear term. If None, defaults to a small randomish value.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
     rand : Boolean.
@@ -97,7 +97,12 @@ class Quadratic(Polynomial):
 
     def __init__(self, N=100, a=None, b=None, c=None, xlim=(-10, 10), add_rand=True, rand_factor=1.0, seed=None):
 
-        args = [i for i in [a, b, c] if i is not None] or None
+        args = [i or 0 for i in [a, b, c] if i is not None] or None
+
+        if all(i is None for i in [a, b, c]):
+            args = None
+        else:
+            args = [i or 0 for i in [a, b, c]]
 
         super().__init__(N=N,
                          a=args,
