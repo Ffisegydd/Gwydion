@@ -1,0 +1,3 @@
+
+class GwydionError(Exception):
+    pass
