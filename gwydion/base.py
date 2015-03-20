@@ -4,6 +4,7 @@ from inspect import getfullargspec
 import numpy as np
 import matplotlib.pyplot as plt
 
+from gwydion.exceptions import GwydionError
 
 class Base(ABC):
     """
@@ -30,7 +31,12 @@ class Base(ABC):
 
         self.N = N
         self.seed = seed
-        self.random = np.random.RandomState(self.seed)
+
+        try:
+            self.random = np.random.RandomState(self.seed)
+        except Exception as e:
+            raise GwydionError('Setting the random seed has failed.') from e
+
         self.xlim = xlim
         self.add_rand = add_rand
 
