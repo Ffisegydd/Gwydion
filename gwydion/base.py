@@ -51,7 +51,11 @@ class Base(ABC):
 
     @property
     def data(self):
-        x = np.linspace(*self.xlim, num=self.N)
+        try:
+            x = np.linspace(*self.xlim, num=self.N)
+        except Exception as e:
+            raise GwydionError('Unable to create x-data') from e
+
         y = self.func(x)
         r = self.r
         return x, y + r

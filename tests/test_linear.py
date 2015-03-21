@@ -2,6 +2,7 @@ import pytest
 import numpy as np
 
 from gwydion import Linear
+from gwydion.exceptions import GwydionError
 
 SEED = 31415927
 TOLERANCE = 0.00001
@@ -22,7 +23,6 @@ def test_linear_non_random():
 
 
 def test_linear_random():
-
     x_test = [0., 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.]
     y_test = [3.41744462, 4.68728196, 7.02554467, 8.42349459,
               9.99319788, 11.80768233, 13.75455861, 15.48142866,
@@ -42,7 +42,6 @@ def test_linear_random():
 
 
 def test_linear_printing():
-
     linear = Linear(seed=SEED, N=11)
 
     for s in ['N=11', 'add_rand=True', 'rand_factor=0.5']:
@@ -54,7 +53,6 @@ def test_linear_printing():
 
 
 def test_linear_seeding():
-
     linear1 = Linear(seed=SEED)
     linear2 = Linear(seed=SEED)
 
@@ -63,3 +61,20 @@ def test_linear_seeding():
     assert linear1.c == linear2.c
 
     assert all(np.array_equal(i, j) for i, j in zip(linear1.data, linear2.data))
+
+def test_linear_exceptions():
+    with pytest.raises(GwydionError):
+        Linear(seed='1234')
+
+    with pytest.raises(GwydionError):
+        Linear(m=2j)
+    with pytest.raises(GwydionError):
+        Linear(m='1234')
+
+    with pytest.raises(GwydionError):
+        linear = Linear(xlim=('0', '10'))
+        x, y = linear.data
+    with pytest.raises(GwydionError):
+        linear = Linear(N='asesd')
+        x, y = linear.data
+

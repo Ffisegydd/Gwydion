@@ -1,4 +1,5 @@
 from gwydion.base import Base
+from gwydion.exceptions import GwydionError
 
 
 class Linear(Base):
@@ -45,6 +46,11 @@ class Linear(Base):
         self.set_variables(m, c)
 
     def set_variables(self, m, c):
+
+        for var in [m, c]:
+            if var is not None and not isinstance(var, (float, int)):
+                raise GwydionError('Variables must be either float, int, or None.')
+
         if m is None:
             self.m = (self.random.rand() + 0.5) * 2
         else:
