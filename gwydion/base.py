@@ -39,25 +39,31 @@ class Base(ABC):
 
         self.xlim = xlim
         self.add_rand = add_rand
-
-        if self.add_rand:
-            self.rand_factor = rand_factor
-        else:
-            self.rand_factor = 0
+        self.rand_factor = rand_factor if self.add_rand else 0
 
     @property
     def r(self):
-        return self.rand_factor * (2 * self.random.rand(self.N) - 1)
+        try:
+            rand = self.rand_factor * (2 * self.random.rand(self.N) - 1)
+        except Exception as e:
+            raise GwydionError('Unable to create randomised data.') from e
+
+        return rand
 
     @property
     def data(self):
         try:
             x = np.linspace(*self.xlim, num=self.N)
         except Exception as e:
-            raise GwydionError('Unable to create x-data') from e
+            raise GwydionError('Unable to create x-data.') from e
 
-        y = self.func(x)
+        try:
+            y = self.func(x)
+        except Exception as e:
+            raise GwydionError('Unable to create y-data.') from e
+
         r = self.r
+
         return x, y + r
 
     def plot(self, *args, ax=None, **kwargs):
