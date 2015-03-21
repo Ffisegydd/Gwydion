@@ -77,7 +77,7 @@ class Base(ABC):
         return ax
 
     @abstractmethod
-    def set_variables(self):
+    def set_variables(self, *args):
         pass
 
     @abstractmethod

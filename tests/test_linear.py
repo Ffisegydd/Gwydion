@@ -64,17 +64,7 @@ def test_linear_seeding():
 
 def test_linear_exceptions():
     with pytest.raises(GwydionError):
-        Linear(seed='1234')
-
-    with pytest.raises(GwydionError):
         Linear(m=2j)
     with pytest.raises(GwydionError):
         Linear(m='1234')
-
-    with pytest.raises(GwydionError):
-        linear = Linear(xlim=('0', '10'))
-        x, y = linear.data
-    with pytest.raises(GwydionError):
-        linear = Linear(N='asesd')
-        x, y = linear.data
 
