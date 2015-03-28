@@ -1,11 +1,13 @@
 from gwydion.base import np, Base
 
+from gwydion.exceptions import GwydionError
+
 
 class Sine(Base):
     """
     Sine wave function. Returned function is
 
-        y = A*sin(2*pi*f*x + p)
+        y = I*sin(2*pi*f*x + p)
 
     Parameters
     ----------
@@ -47,6 +49,10 @@ class Sine(Base):
         self.set_variables(I, f, p)
 
     def set_variables(self, I, f, p):
+
+        for var in [I, f, p]:
+            if var is not None and not isinstance(var, (float, int)):
+                raise GwydionError('Variables must be either float, int, or None.')
 
         defaults = {'I': 1.0 + (self.random.rand() - 0.5) * 0.5,
                     'f': self.random.rand() + 0.5,
