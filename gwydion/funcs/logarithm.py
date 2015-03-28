@@ -1,4 +1,5 @@
 from gwydion.base import np, Base
+from gwydion.exceptions import GwydionError
 
 
 class Logarithm(Base):
@@ -48,6 +49,10 @@ class Logarithm(Base):
         self.set_variables(base, I, k)
 
     def set_variables(self, base, I, k):
+
+        for var in [I, k]:
+            if var is not None and not isinstance(var, (float, int)):
+                raise GwydionError('Variables must be either float, int, or None.')
 
         defaults = {'base': np.e,
                     'I': 1.0 + (self.random.rand() - 0.5) * 0.5,

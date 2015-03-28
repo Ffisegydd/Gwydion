@@ -4,6 +4,7 @@ import numpy as np
 from gwydion import Exponential
 from gwydion.exceptions import GwydionError
 
+
 SEED = 31415927
 TOLERANCE = 0.00001
 
@@ -39,7 +40,7 @@ def test_exponential_random():
         assert abs(i - j) < TOLERANCE
 
 
-def test_linear_printing():
+def test_exponential_printing():
     exp = Exponential(seed=SEED, N=11)
 
     for s in ['N=11', 'add_rand=True', 'rand_factor=0.1']:
@@ -50,7 +51,7 @@ def test_linear_printing():
         assert s in repr(exp)
 
 
-def test_linear_seeding():
+def test_exponential_seeding():
     exp1 = Exponential(seed=SEED)
     exp2 = Exponential(seed=SEED)
 
@@ -60,7 +61,7 @@ def test_linear_seeding():
 
     assert all(np.array_equal(i, j) for i, j in zip(exp1.data, exp2.data))
 
-def test_linear_exceptions():
+def test_exponential_exceptions():
     with pytest.raises(GwydionError):
         Exponential(k=2j)
     with pytest.raises(GwydionError):
