@@ -33,7 +33,7 @@ class Exponential(Base):
 
     >>>> Exponential()  # Default params, returns a "normal" exponential.
     >>>> Exponential(N=1000)  # Increase the number of data points.
-    >>>> Exponential(b=-1)  # Exponential decay.
+    >>>> Exponential(k=-1)  # Exponential decay.
     >>>> Exponential(rand=False)  # Turn off randomness.
     >>>> Exponential(seed=1234)  # Seeded RNG
 
