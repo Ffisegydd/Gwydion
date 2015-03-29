@@ -39,7 +39,6 @@ setup(
       name=package_name,
       packages=find_packages(),
       url='https://github.com/Ffisegydd/Gwydion',
-      # download_url='https://github.com/Ffisegydd/Gwydion/releases/tag/0.1dev',
       license='MIT',
       author='Keiron J. Pizzey',
       author_email='kjpizzey@gmail.com',

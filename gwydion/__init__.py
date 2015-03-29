@@ -1,4 +1,4 @@
-__version__ = '0.1.dev'
+__version__ = '0.1'
 
 from gwydion.funcs.exponential import Exponential
 from gwydion.funcs.linear import Linear
@@ -10,6 +10,5 @@ from gwydion.stats.normal import NormalDistribution
 
 from .random_array import RandomArray
 
-__all__ = ['Cubic', 'Exponential', 'Linear', 'Logarithm',
-           'Polynomial', 'Quadratic', 'RandomArray', 'Sine',
-           'NormalDistribution']
+__all__ = ['Cubic', 'Exponential', 'Linear', 'Logarithm', 'Polynomial',
+           'Quadratic', 'RandomArray', 'Sine', 'NormalDistribution']
