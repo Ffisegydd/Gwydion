@@ -35,10 +35,9 @@ class Polynomial(Base):
     >>>> Polynomial(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, a=None, xlim=(-10, 10), add_rand=True, rand_factor=1.0, seed=None):
+    def __init__(self, N=100, a=None, xlim=(-10, 10), rand_factor=1.0, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
@@ -98,7 +97,7 @@ class Quadratic(Polynomial):
     >>>> Quadratic(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, a=None, b=None, c=None, xlim=(-10, 10), add_rand=True, rand_factor=1.0, seed=None):
+    def __init__(self, N=100, a=None, b=None, c=None, xlim=(-10, 10), rand_factor=1.0, seed=None):
 
         args = [c, b, a]
         if all(arg is None for arg in args):
@@ -109,7 +108,6 @@ class Quadratic(Polynomial):
         super().__init__(N=N,
                          a=args,
                          xlim=xlim,
-                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
@@ -152,7 +150,7 @@ class Cubic(Polynomial):
     >>>> Cubic(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, a=None, b=None, c=None, d=None, xlim=(-10, 10), add_rand=True, rand_factor=5.0, seed=None):
+    def __init__(self, N=100, a=None, b=None, c=None, d=None, xlim=(-10, 10), rand_factor=5.0, seed=None):
 
         args = [d, c, b, a]
         if all(arg is None for arg in args):
@@ -163,6 +161,5 @@ class Cubic(Polynomial):
         super().__init__(N=N,
                          a=args,
                          xlim=xlim,
-                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
