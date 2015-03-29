@@ -39,10 +39,9 @@ class Sine(Base):
 
     """
 
-    def __init__(self, N=100, I=None, f=None, p=None, xlim=(-10, 10), add_rand=True, rand_factor=0.1, seed=None):
+    def __init__(self, N=100, I=None, f=None, p=None, xlim=(-10, 10), rand_factor=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 

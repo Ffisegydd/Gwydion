@@ -26,7 +26,7 @@ class Base(ABC):
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
     """
 
-    def __init__(self, N, xlim, add_rand, rand_factor, seed):
+    def __init__(self, N, xlim, rand_factor, seed):
         super().__init__()
 
         self.N = N
@@ -38,8 +38,7 @@ class Base(ABC):
             raise GwydionError('Setting the random seed has failed.') from e
 
         self.xlim = xlim
-        self.add_rand = add_rand
-        self.rand_factor = rand_factor if self.add_rand else 0
+        self.rand_factor = rand_factor if rand_factor is not None else 0
 
     @property
     def r(self):
@@ -85,7 +84,7 @@ class Base(ABC):
         pass
 
     def __str__(self):
-        s = '<{s.__class__.__name__} : N={s.N}, add_rand={s.add_rand}, rand_factor={s.rand_factor}>'
+        s = '<{s.__class__.__name__} : N={s.N}, rand_factor={s.rand_factor}>'
         return s.format(s=self)
 
     def __repr__(self):

@@ -36,10 +36,9 @@ class Linear(Base):
     >>>> Linear(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, m=None, c=None, xlim=(0, 10), add_rand=True, rand_factor=0.5, seed=None):
+    def __init__(self, N=100, m=None, c=None, xlim=(0, 10), rand_factor=0.5, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 

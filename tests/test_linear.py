@@ -12,7 +12,7 @@ def test_linear_creation():
     assert linear
 
 def test_linear_non_random():
-    linear = Linear(add_rand=False, m=2.5, c=0, xlim=(0,5), N=6)
+    linear = Linear(rand_factor=None, m=2.5, c=0, xlim=(0,5), N=6)
     x, y = linear.data
 
     for i, j in zip(x, [0, 1, 2, 3, 4, 5]):
@@ -44,11 +44,11 @@ def test_linear_random():
 def test_linear_printing():
     linear = Linear(seed=SEED, N=11)
 
-    for s in ['N=11', 'add_rand=True', 'rand_factor=0.5']:
+    for s in ['N=11', 'rand_factor=0.5']:
         assert s in str(linear)
 
     for s in ['N=11', 'xlim=(0, 10)', 'seed=31415927', 'm=1.6932286417273668',
-              'c=3.1585068145959303', 'rand_factor=0.5', 'add_rand=True']:
+              'c=3.1585068145959303', 'rand_factor=0.5']:
         assert s in repr(linear)
 
 
