@@ -20,7 +20,7 @@ class Polynomial(Base):
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
-        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.1.
+        The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 1.0.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
 
@@ -31,7 +31,7 @@ class Polynomial(Base):
     >>>> Polynomial(N=1000)  # Increase the number of data points.
     >>>> Polynomial(a=[0])  # Horizontal line
     >>>> Polynomial(a=[0, 0, 2])  # Simple quadratic.
-    >>>> Polynomial(rand=False)  # Turn off randomness.
+    >>>> Polynomial(rand_factor=None)  # Turn off randomness.
     >>>> Polynomial(seed=1234)  # Seeded RNG
     """
 
@@ -83,7 +83,7 @@ class Quadratic(Polynomial):
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
-        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.1.
+        The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 1.0.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
 
@@ -93,7 +93,7 @@ class Quadratic(Polynomial):
     >>>> Quadratic()  # Default params, returns a "normal" exponential.
     >>>> Quadratic(N=1000)  # Increase the number of data points.
     >>>> Quadratic(a=0, b=0, c=0)  # Horizontal line
-    >>>> Quadratic(rand=False)  # Turn off randomness.
+    >>>> Quadratic(rand_factor=None)  # Turn off randomness.
     >>>> Quadratic(seed=1234)  # Seeded RNG
     """
 
@@ -136,7 +136,7 @@ class Cubic(Polynomial):
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
-        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.1.
+        The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 5.0.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
 
@@ -146,7 +146,7 @@ class Cubic(Polynomial):
     >>>> Cubic()  # Default params, returns a "normal" exponential.
     >>>> Cubic(N=1000)  # Increase the number of data points.
     >>>> Cubic(a=0, b=0, c=0, d=0)  # Horizontal line
-    >>>> Cubic(rand=False)  # Turn off randomness.
+    >>>> Cubic(rand_factor=None)  # Turn off randomness.
     >>>> Cubic(seed=1234)  # Seeded RNG
     """
 

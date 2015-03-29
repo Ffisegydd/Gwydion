@@ -1,4 +1,5 @@
 from gwydion.base import np, Base
+from gwydion.exceptions import GwydionError
 
 
 class NormalDistribution(Base):
@@ -21,7 +22,7 @@ class NormalDistribution(Base):
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
-        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.02.
+        The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.02.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
 
@@ -30,22 +31,26 @@ class NormalDistribution(Base):
 
     >>>> NormalDistribution()  # Default params, returns a "normal" exponential.
     >>>> NormalDistribution(N=1000)  # Increase the number of data points.
-    >>>> NormalDistribution(a=100, b=0, c=0.01)  # Tall, thin peak at x=0
-    >>>> NormalDistribution(rand=False)  # Turn off randomness.
-    >>>> NormalDistribution(seed=1234)  # Seeded RNG
+    >>>> NormalDistribution(mu=1, sigma=0.01)  # Tall, thin peak at x=1.
+    >>>> NormalDistribution(rand_factor=None)  # Turn off randomness.
+    >>>> NormalDistribution(seed=1234)  # Seeded RNG.
     """
 
 
-    def __init__(self, N=100, mu=None, sigma=None, xlim=None, add_rand=True, rand_factor=0.02, seed=None):
+    def __init__(self, N=100, mu=None, sigma=None, xlim=None, rand_factor=0.02, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         add_rand=add_rand,
                          rand_factor=rand_factor,
                          seed=seed)
 
         self.set_variables(mu, sigma)
 
     def set_variables(self, mu, sigma):
+
+        for var in [mu, sigma]:
+            if var is not None and not isinstance(var, (float, int)):
+                raise GwydionError('Variables must be either float, int, or None.')
+
         defaults = {'mu': (self.random.rand() - 0.5) * 0.5,
                     'sigma': self.random.rand() * 0.5}
 

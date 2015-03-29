@@ -22,7 +22,7 @@ class Linear(Base):
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
-        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.5.
+        TThe amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.5.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
 
@@ -32,7 +32,7 @@ class Linear(Base):
     >>>> Linear()  # Default params, returns a "normal" straight line.
     >>>> Linear(N=1000)  # Increase the number of data points.
     >>>> Linear(m=0, c=0)  # Horizontal line with randomness
-    >>>> Linear(rand=False)  # Turn off randomness.
+    >>>> Linear(rand_factor=None)  # Turn off randomness.
     >>>> Linear(seed=1234)  # Seeded RNG
     """
 

@@ -24,7 +24,7 @@ class Sine(Base):
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
-        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.1.
+        The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.1.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
 
@@ -34,7 +34,7 @@ class Sine(Base):
     >>>> Sine()  # Default params.
     >>>> Sine(N=1000)  # Increase the number of data points.
     >>>> Sine(I=0.1, p=1.0)  # Modify the function parameters.
-    >>>> Sine(rand=False)  # Turn off randomness.
+    >>>> Sine(rand_factor=None)  # Turn off randomness.
     >>>> Sine(seed=1234)  # Seeded RNG
 
     """

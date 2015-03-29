@@ -21,10 +21,8 @@ class Exponential(Base):
         Amplitude of the exponent. If None, defaults to a random value around 0.0
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
-    rand : Boolean.
-        Choose whether the y values should have some random numbers added to them. Defaults to True.
-    rand_factor : Float or integer.
-        The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.1.
+    rand_factor : Float, integer, or None.
+        The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.1.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
 
@@ -34,7 +32,7 @@ class Exponential(Base):
     >>>> Exponential()  # Default params, returns a "normal" exponential.
     >>>> Exponential(N=1000)  # Increase the number of data points.
     >>>> Exponential(k=-1)  # Exponential decay.
-    >>>> Exponential(rand=False)  # Turn off randomness.
+    >>>> Exponential(add_rand=None)  # Turn off randomness.
     >>>> Exponential(seed=1234)  # Seeded RNG
 
     """
