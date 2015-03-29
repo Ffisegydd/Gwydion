@@ -1,4 +1,5 @@
 from gwydion.base import np, Base
+from gwydion.exceptions import GwydionError
 
 
 class Polynomial(Base):
@@ -45,9 +46,11 @@ class Polynomial(Base):
 
     def set_variables(self, a):
 
+        if a is not None and not all(isinstance(val, (int, float)) for val in a):
+            raise GwydionError('Polynomial parameters must be sequence of ints or floats.')
+
         if a is None:
             n = self.random.randint(2, 4)
-            # self.a = [(random.random() - 0.5) for _ in range(n)]
             self.a = self.random.rand(n) - 0.5
         else:
             self.a = a
@@ -55,10 +58,10 @@ class Polynomial(Base):
         self.params = self.a
 
     def func(self, x):
-        y = sum([v * np.power(x, i) for i, v in enumerate(self.a)])
+        y = sum(v * np.power(x, i) for i, v in enumerate(self.a))
         return y
 
-#TODO: Fix Quadratic and Cubic, MAJOR ISSUES. NO WORK.
+
 class Quadratic(Polynomial):
     """
     Quadratic function. Returned function is
@@ -75,7 +78,7 @@ class Quadratic(Polynomial):
     b : Float or integer, or None
         Polynomial linear term. If None, defaults to a small randomish value.
     c : Float or integer, or None
-        Polynomial linear term. If None, defaults to a small randomish value.
+        Polynomial constant term. If None, defaults to a small randomish value.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
     rand : Boolean.
@@ -97,12 +100,11 @@ class Quadratic(Polynomial):
 
     def __init__(self, N=100, a=None, b=None, c=None, xlim=(-10, 10), add_rand=True, rand_factor=1.0, seed=None):
 
-        args = [i or 0 for i in [a, b, c] if i is not None] or None
-
-        if all(i is None for i in [a, b, c]):
+        args = [c, b, a]
+        if all(arg is None for arg in args):
             args = None
         else:
-            args = [i or 0 for i in [a, b, c]]
+            args = [arg if arg is not None else 0 for arg in args]
 
         super().__init__(N=N,
                          a=args,
@@ -152,9 +154,11 @@ class Cubic(Polynomial):
 
     def __init__(self, N=100, a=None, b=None, c=None, d=None, xlim=(-10, 10), add_rand=True, rand_factor=5.0, seed=None):
 
-        args = [i for i in [a, b, c, d] if i is not None] or None
-
-        print(vars(self))
+        args = [d, c, b, a]
+        if all(arg is None for arg in args):
+            args = None
+        else:
+            args = [arg if arg is not None else 0 for arg in args]
 
         super().__init__(N=N,
                          a=args,
