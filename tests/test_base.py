@@ -22,6 +22,7 @@ class MockBaseClass(Base):
 
 def test_base_creation():
     x = MockBaseClass()
+    assert x
 
 def test_base_exceptions():
     with pytest.raises(GwydionError):
