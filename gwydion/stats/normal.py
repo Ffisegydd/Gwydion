@@ -18,7 +18,7 @@ class NormalDistribution(Base):
     sigma : Float, integer, or None.
         Width parameter equal to standard deviation. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers, or None.
-        (Min, Max) values for the x-data. If None, defaults to (b - 5*c, b + 5*x).
+        (Min, Max) values for the x-data. If None, defaults to (mu - 5*sigma, mu + 5*sigma).
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
