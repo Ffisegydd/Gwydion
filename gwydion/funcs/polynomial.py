@@ -17,8 +17,6 @@ class Polynomial(Base):
         Parameters for the polynomial. If None, defaults to either a quadratic or cubic with randomish values.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
-    rand : Boolean.
-        Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 1.0.
     seed : Integer or None.

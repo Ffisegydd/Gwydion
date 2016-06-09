@@ -2,7 +2,7 @@ from gwydion.base import np, Base, ProbDistBase
 from gwydion.exceptions import GwydionError
 
 
-class NormalDistribution(ProbDistBase):
+class Normal(ProbDistBase):
     """
     Gaussian function. Returned function is
 
@@ -19,8 +19,6 @@ class NormalDistribution(ProbDistBase):
         Width parameter equal to standard deviation. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers, or None.
         (Min, Max) values for the x-data. If None, defaults to (mu - 5*sigma, mu + 5*sigma).
-    rand : Boolean.
-        Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.02.
     seed : Integer or None.
@@ -29,11 +27,11 @@ class NormalDistribution(ProbDistBase):
     Examples
     --------
 
-    >>>> NormalDistribution()  # Default params, returns a "normal" exponential.
-    >>>> NormalDistribution(N=1000)  # Increase the number of data points.
-    >>>> NormalDistribution(mu=1, sigma=0.01)  # Tall, thin peak at x=1.
-    >>>> NormalDistribution(rand_factor=None)  # Turn off randomness.
-    >>>> NormalDistribution(seed=1234)  # Seeded RNG.
+    >>>> Normal()  # Default params, returns a "normal" exponential.
+    >>>> Normal(N=1000)  # Increase the number of data points.
+    >>>> Normal(mu=1, sigma=0.01)  # Tall, thin peak at x=1.
+    >>>> Normal(rand_factor=None)  # Turn off randomness.
+    >>>> Normal(seed=1234)  # Seeded RNG.
     """
 
 

@@ -4,7 +4,7 @@ from gwydion.base import np, Base, DiscreteProbDistBase
 from gwydion.exceptions import GwydionError
 
 
-class PoissonDistribution(DiscreteProbDistBase):
+class Poisson(DiscreteProbDistBase):
     """
     Poisson function. Returned function is
 
@@ -19,8 +19,6 @@ class PoissonDistribution(DiscreteProbDistBase):
         Expected number of events in an interval. If none, defaults to a random value between 0 and 30.
     xlim : Tuple of floats or integers, or None.
         (Min, Max) values for the x-data. If None, defaults to (mu - 5*sigma, mu + 5*sigma).
-    rand : Boolean.
-        Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.02.
     seed : Integer or None.
@@ -38,11 +36,11 @@ class PoissonDistribution(DiscreteProbDistBase):
     Examples
     --------
 
-    >>>> PoissonDistribution()  # Default params, returns a random poisson distribution.
-    >>>> PoissonDistribution(N=1000)  # Increase the number of data points.
-    >>>> PoissonDistribution(lam=10)  # Setting the number of events expected in an interval to 10.
-    >>>> PoissonDistribution(rand_factor=None)  # Turn off randomness.
-    >>>> PoissonDistribution(seed=1234)  # Seeded RNG.
+    >>>> Poisson()  # Default params, returns a random poisson distribution.
+    >>>> Poisson(N=1000)  # Increase the number of data points.
+    >>>> Poisson(lam=10)  # Setting the number of events expected in an interval to 10.
+    >>>> Poisson(rand_factor=None)  # Turn off randomness.
+    >>>> Poisson(seed=1234)  # Seeded RNG.
     """
 
 

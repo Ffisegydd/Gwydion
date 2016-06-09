@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gwydion import NormalDistribution
+from gwydion import Normal
 from gwydion.exceptions import GwydionError
 
 
@@ -9,12 +9,12 @@ SEED = 31415927
 TOLERANCE = 0.00001
 
 def test_normal_creation():
-    normal = NormalDistribution()
+    normal = Normal()
     assert normal
 
 
 def test_normal_non_random():
-    normal = NormalDistribution(rand_factor=None, mu=0.0, sigma=2, xlim=(-3,3), N=7)
+    normal = Normal(rand_factor=None, mu=0.0, sigma=2, xlim=(-3,3), N=7)
     x, y = normal.data
 
     for i, j in zip(x, [-3, -2, -1, 0, 1, 2, 3]):
@@ -28,7 +28,7 @@ def test_normal_random():
     x_test = [-3., -2., -1., 0., 1., 2., 3.]
     y_test = [0.01035751, -0.00656358, 0.09470932, 0.96825844, 0.03250045, 0.0073236, 0.0174672]
 
-    normal = NormalDistribution(seed=SEED, N=7, xlim=(-3, 3))
+    normal = Normal(seed=SEED, N=7, xlim=(-3, 3))
     x, y = normal.data
     print(y)
 
@@ -43,7 +43,7 @@ def test_normal_random():
 
 
 def test_normal_printing():
-    normal = NormalDistribution(seed=SEED, N=11)
+    normal = Normal(seed=SEED, N=11)
 
     for s in ['N=11', 'rand_factor=0.02']:
         assert s in str(normal)
@@ -54,8 +54,8 @@ def test_normal_printing():
 
 
 def test_normal_seeding():
-    normal1 = NormalDistribution(seed=SEED)
-    normal2 = NormalDistribution(seed=SEED)
+    normal1 = Normal(seed=SEED)
+    normal2 = Normal(seed=SEED)
 
     assert normal1 != normal2
     assert normal1.mu == normal2.mu
@@ -65,7 +65,7 @@ def test_normal_seeding():
 
 def test_normal_exceptions():
     with pytest.raises(GwydionError):
-        NormalDistribution(mu=2j)
+        Normal(mu=2j)
     with pytest.raises(GwydionError):
-        NormalDistribution(sigma='1234')
+        Normal(sigma='1234')
 

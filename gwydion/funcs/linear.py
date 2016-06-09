@@ -19,8 +19,6 @@ class Linear(Base):
         y-intercept of straight line function. If None, defaults to a randomised "typical" value.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (0, 10).
-    rand : Boolean.
-        Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
         TThe amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.5.
     seed : Integer or None.

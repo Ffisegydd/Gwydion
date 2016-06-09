@@ -6,11 +6,12 @@ from gwydion.funcs.logarithm import Logarithm
 from gwydion.funcs.polynomial import Polynomial, Quadratic, Cubic
 from gwydion.funcs.sine import Sine
 
-from gwydion.stats.normal import NormalDistribution
-from gwydion.stats.poisson import PoissonDistribution
+from gwydion.stats.normal import Normal
+from gwydion.stats.poisson import Poisson
+from gwydion.stats.hypergeometric import Hypergeometric
 
 from .random_array import RandomArray
 
 __all__ = ['Cubic', 'Exponential', 'Linear', 'Logarithm', 'Polynomial',
-           'Quadratic', 'RandomArray', 'Sine', 'NormalDistribution',
-           'PoissonDistribution']
+           'Quadratic', 'RandomArray', 'Sine', 'Normal',
+           'Poisson']

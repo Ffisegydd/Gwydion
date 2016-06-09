@@ -21,8 +21,6 @@ class Sine(Base):
         Phase of sine wave. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
-    rand : Boolean.
-        Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand_factor : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.1.
     seed : Integer or None.

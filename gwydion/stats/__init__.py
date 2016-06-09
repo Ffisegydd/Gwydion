@@ -1,2 +1,3 @@
-from gwydion.stats.normal import NormalDistribution
-from gwydion.stats.poisson import PoissonDistribution
+from gwydion.stats.normal import Normal
+from gwydion.stats.poisson import Poisson
+from gwydion.stats.hypergeometric import Hypergeometric
