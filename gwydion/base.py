@@ -31,6 +31,10 @@ class Base(ABC):
 
         self.N = N
         self.seed = seed
+        self._x = None
+        self._y = None
+        self._r = None
+        self._data = None
 
         try:
             self.random = np.random.RandomState(self.seed)
@@ -42,28 +46,37 @@ class Base(ABC):
 
     @property
     def r(self):
-        try:
-            rand = self.rand_factor * (2 * self.random.rand(self.N) - 1)
-        except Exception as e:
-            raise GwydionError('Unable to create randomised data.') from e
+        if self._r is None:
+            try:
+                self._r = self.rand_factor * (2 * self.random.rand(self.N) - 1)
+            except Exception as e:
+                raise GwydionError('Unable to create randomised data.') from e
 
-        return rand
+        return self._r
+
+    @property
+    def x(self):
+        if self._x is None:
+            try:
+                self._x = np.linspace(*self.xlim, num=self.N)
+            except Exception as e:
+                raise GwydionError('Unable to create x-data.') from e
+
+        return self._x
+
+    @property
+    def y(self):
+        if self._y is None:
+            try:
+                self._y = self.func(self.x)
+            except Exception as e:
+                raise GwydionError('Unable to create y-data.') from e
+
+        return self._y + self.r
 
     @property
     def data(self):
-        try:
-            x = np.linspace(*self.xlim, num=self.N)
-        except Exception as e:
-            raise GwydionError('Unable to create x-data.') from e
-
-        try:
-            y = self.func(x)
-        except Exception as e:
-            raise GwydionError('Unable to create y-data.') from e
-
-        r = self.r
-
-        return x, y + r
+        return self.x, self.y
 
     def plot(self, *args, ax=None, **kwargs):
         x, y = self.data
