@@ -2,7 +2,10 @@ from abc import ABC, abstractmethod
 from inspect import getfullargspec
 
 import numpy as np
-import scipy.integrate as si
+try:
+    import scipy.integrate as si
+except ImportError:
+    pass
 import matplotlib.pyplot as plt
 
 from copy import deepcopy
@@ -112,11 +115,23 @@ class Base(ABC):
         return s.format(self.__class__.__name__)
 
 
-class StatsBase(Base):
-    def __init__(self, N, xlim, rand_factor, seed):
-        super().__init__(N, xlim, rand_factor, seed)
+class ProbDistBase(Base):
 
     def to_cdf(self):
         new = deepcopy(self)
         new._y = si.cumtrapz(new.y, new.x, initial=0)
         return new
+
+class DiscreteProbDistBase(ProbDistBase):
+    
+    @property
+    def x(self):
+        if self._x is None:
+            try:
+                self._x = np.unique(np.linspace(*self.xlim, num=self.N).astype('int'))
+            except Exception as e:
+                raise GwydionError('Unable to create x-data.') from e
+        if self.N != self._x.size:
+            self.N = self._x.size
+
+        return self._x

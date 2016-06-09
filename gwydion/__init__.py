@@ -7,8 +7,10 @@ from gwydion.funcs.polynomial import Polynomial, Quadratic, Cubic
 from gwydion.funcs.sine import Sine
 
 from gwydion.stats.normal import NormalDistribution
+from gwydion.stats.poisson import PoissonDistribution
 
 from .random_array import RandomArray
 
 __all__ = ['Cubic', 'Exponential', 'Linear', 'Logarithm', 'Polynomial',
-           'Quadratic', 'RandomArray', 'Sine', 'NormalDistribution']
+           'Quadratic', 'RandomArray', 'Sine', 'NormalDistribution',
+           'PoissonDistribution']

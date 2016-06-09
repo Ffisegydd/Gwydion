@@ -1,8 +1,8 @@
-from gwydion.base import np, Base, StatsBase
+from gwydion.base import np, Base, ProbDistBase
 from gwydion.exceptions import GwydionError
 
 
-class NormalDistribution(StatsBase):
+class NormalDistribution(ProbDistBase):
     """
     Gaussian function. Returned function is
 
