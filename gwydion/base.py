@@ -117,13 +117,13 @@ class Base(ABC):
 
 class ProbDistBase(Base):
 
-    def to_cdf(self):
+    def to_cum(self):
         new = deepcopy(self)
         new._y = si.cumtrapz(new.y, new.x, initial=0)
         return new
 
 class DiscreteProbDistBase(ProbDistBase):
-    
+
     @property
     def x(self):
         if self._x is None:
