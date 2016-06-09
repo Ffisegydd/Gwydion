@@ -1,6 +1,7 @@
 matplotlib
-nose
 numpy
+scipy
+nose
 py
 pyparsing
 pytest

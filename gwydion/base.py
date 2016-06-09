@@ -2,7 +2,10 @@ from abc import ABC, abstractmethod
 from inspect import getfullargspec
 
 import numpy as np
+import scipy.integrate as si
 import matplotlib.pyplot as plt
+
+from copy import deepcopy
 
 from gwydion.exceptions import GwydionError
 
@@ -107,3 +110,13 @@ class Base(ABC):
         s = '{}(' + ', '.join(['{}={}'.format(key, val) for key, val in v.items() if key in spec.args]) + ')'
 
         return s.format(self.__class__.__name__)
+
+
+class StatsBase(Base):
+    def __init__(self, N, xlim, rand_factor, seed):
+        super().__init__(N, xlim, rand_factor, seed)
+
+    def to_cdf(self):
+        new = deepcopy(self)
+        new._y = si.cumtrapz(new.y, new.x, initial=0)
+        return new
