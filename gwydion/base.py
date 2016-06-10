@@ -122,12 +122,36 @@ class Base(ABC):
 
         super().__setattr__(name, value)
 
+
+class ProbDist(object):
+
     def to_cum(self):
         new = deepcopy(self)
         new._y = si.cumtrapz(new.y, new.x, initial=0)
         return new
 
-class DiscreteProbDistBase(ProbDistBase):
+    @property
+    def mean(self):
+        return NotImplemented()
+
+    @property
+    def mode(self):
+        return NotImplemented()
+
+    @property
+    def median(self):
+        return NotImplemented()
+
+    @property
+    def variance(self):
+        return NotImplemented()
+
+    @property
+    def skewness(self):
+        return NotImplemented()
+
+
+class DiscreteProbDist(object):
 
     @property
     def x(self):
