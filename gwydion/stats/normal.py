@@ -2,7 +2,7 @@ from gwydion.base import np, Base, ProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Normal(Base, ProbDist):
+class Normal(ProbDist, Base):
     """
     Gaussian function. Returned function is
 

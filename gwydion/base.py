@@ -130,6 +130,9 @@ class ProbDist(object):
         new._y = si.cumtrapz(new.y, new.x, initial=0)
         return new
 
+    def sample(self, N):
+        return NotImplemented()
+
     @property
     def mean(self):
         return NotImplemented()

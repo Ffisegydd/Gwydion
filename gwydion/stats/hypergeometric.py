@@ -4,7 +4,7 @@ from gwydion.base import np, Base, ProbDist, DiscreteProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Hypergeometric(Base, ProbDist, DiscreteProbDist):
+class Hypergeometric(DiscreteProbDist, ProbDist, Base):
     """
     Hypergeometric function. Returned function is
 
@@ -76,15 +76,14 @@ class Hypergeometric(Base, ProbDist, DiscreteProbDist):
             else:
                 setattr(self, key, locals()[key])
 
-        if self._xlim is None:
-            self._xlim = (0, self.m)
+        if self.xlim is None:
+            self.xlim = (0, self.m)
 
     def func(self, x):
-        M = self.M
-        m = self.m
-        X = self.X
+        return hypergeom(self.M, self.X, self.m).pmf(x)
 
-        return hypergeom.pmf(x, M, X, m)
+    def sample(self, x=None):
+        return hypergeom(self.M, self.X, self.m).rvs(x)
 
     @property
     def mean(self):

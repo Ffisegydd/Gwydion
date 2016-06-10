@@ -4,7 +4,7 @@ from gwydion.base import np, Base, ProbDist, DiscreteProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Poisson(Base, ProbDist, DiscreteProbDist):
+class Poisson(DiscreteProbDist, ProbDist, Base):
     """
     Poisson function. Returned function is
 
@@ -71,8 +71,11 @@ class Poisson(Base, ProbDist, DiscreteProbDist):
 
     def func(self, x):
         lam = self.lam
+        return poisson(lam).pmf(x)
 
-        return poisson.pmf(x, lam)
+    def sample(self, N=None):
+        lam = self.lam
+        return poisson(lam).rvs(size=N)
 
     @property
     def mean(self):
