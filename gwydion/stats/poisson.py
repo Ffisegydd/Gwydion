@@ -1,10 +1,10 @@
 from scipy.stats import poisson
 
-from gwydion.base import np, Base, DiscreteProbDistBase
+from gwydion.base import np, Base, ProbDist, DiscreteProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Poisson(DiscreteProbDistBase):
+class Poisson(Base, ProbDist, DiscreteProbDist):
     """
     Poisson function. Returned function is
 
@@ -73,3 +73,23 @@ class Poisson(DiscreteProbDistBase):
         lam = self.lam
 
         return poisson.pmf(x, lam)
+
+    @property
+    def mean(self):
+        return self.lam
+
+    @property
+    def mode(self):
+        return int(self.lam)
+
+    @property
+    def median(self):
+        return int((self.lam + 1/3) - (0.02/self.lam))
+
+    @property
+    def variance(self):
+        return self.lam
+
+    @property
+    def skewness(self):
+        return self.lam ** -0.5

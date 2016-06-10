@@ -1,8 +1,8 @@
-from gwydion.base import np, Base, ProbDistBase
+from gwydion.base import np, Base, ProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Normal(ProbDistBase):
+class Normal(Base, ProbDist):
     """
     Gaussian function. Returned function is
 
@@ -66,3 +66,23 @@ class Normal(ProbDistBase):
         mu, sigma = self.mu, self.sigma
 
         return 1 / (sigma*np.sqrt(2*np.pi)) * np.exp(-(x - mu)**2/(2*sigma**2))
+
+    @property
+    def mean(self):
+        return self.mu
+
+    @property
+    def mode(self):
+        return self.mu
+
+    @property
+    def median(self):
+        return self.mu
+
+    @property
+    def variance(self):
+        return self.sigma**2
+
+    @property
+    def skewness(self):
+        return 0

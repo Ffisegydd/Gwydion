@@ -1,10 +1,10 @@
 from scipy.stats import hypergeom
 
-from gwydion.base import np, Base, DiscreteProbDistBase
+from gwydion.base import np, Base, ProbDist, DiscreteProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Hypergeometric(DiscreteProbDistBase):
+class Hypergeometric(Base, ProbDist, DiscreteProbDist):
     """
     Hypergeometric function. Returned function is
 
@@ -76,8 +76,8 @@ class Hypergeometric(DiscreteProbDistBase):
             else:
                 setattr(self, key, locals()[key])
 
-        if self.xlim is None:
-            self.xlim = (0, self.m)
+        if self._xlim is None:
+            self._xlim = (0, self.m)
 
     def func(self, x):
         M = self.M
@@ -85,3 +85,27 @@ class Hypergeometric(DiscreteProbDistBase):
         X = self.X
 
         return hypergeom.pmf(x, M, X, m)
+
+    @property
+    def mean(self):
+        return self.m*self.X/self.M
+
+    @property
+    def mode(self):
+        return int(((self.m+1)*(self.X+1))/(self.M+2))
+
+    @property
+    def variance(self):
+        M = self.M
+        X = self.X
+        m = self.m
+
+        return int(m * (X/M) * ((M-X)/M) * ((M-m)/(M-1)))
+
+    @property
+    def skewness(self):
+        M = self.M
+        X = self.X
+        m = self.m
+
+        return int(((M - 2*X) * ((M-1)**0.5)*(M - 2*m))/((M-2) * (m * X * (M-X) * (M-m))**0.5))
