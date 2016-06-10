@@ -115,7 +115,7 @@ class Base(ABC):
         return s.format(self.__class__.__name__)
 
     def __setattr__(self, name, value):
-        if name not in {'r', 'x', 'y',}:
+        if name not in {'r', 'x', 'y', '_r', '_x', '_y'}:
             super().__setattr__('_x', None)
             super().__setattr__('_y', None)
             super().__setattr__('_r', None)
@@ -162,5 +162,6 @@ class DiscreteProbDist(object):
                 raise GwydionError('Unable to create x-data.') from e
         if self.N != self._x.size:
             self.N = self._x.size
+            self._x = np.unique(np.linspace(*self.xlim, num=self.N).astype('int'))
 
         return self._x
