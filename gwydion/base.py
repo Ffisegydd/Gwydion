@@ -114,8 +114,13 @@ class Base(ABC):
 
         return s.format(self.__class__.__name__)
 
+    def __setattr__(self, name, value):
+        if name not in {'r', 'x', 'y',}:
+            super().__setattr__('_x', None)
+            super().__setattr__('_y', None)
+            super().__setattr__('_r', None)
 
-class ProbDistBase(Base):
+        super().__setattr__(name, value)
 
     def to_cum(self):
         new = deepcopy(self)
