@@ -30,7 +30,6 @@ def test_polynomial_random():
 
     polynomial = Polynomial(seed=SEED, N=7, xlim=(-3, 3))
     x, y = polynomial.data
-    print(polynomial.a)
 
     for i, j in zip(polynomial.a, [0.13858659, 0.35275832]):
         assert abs(i - j) < TOLERANCE
@@ -44,8 +43,6 @@ def test_polynomial_random():
 
 def test_polynomial_printing():
     polynomial = Polynomial(seed=SEED, N=11)
-    print(str(polynomial))
-    print(repr(polynomial))
     for s in ['N=11', 'rand_factor=1.0']:
         assert s in str(polynomial)
 
@@ -60,8 +57,6 @@ def test_polynomial_seeding():
     assert polynomial1 != polynomial2
     for i, j in zip(polynomial1.a, polynomial2.a):
         assert abs(i - j) < TOLERANCE
-
-    print(polynomial1.data, polynomial2.data)
 
     assert all(np.array_equal(i, j) for i, j in zip(polynomial1.data, polynomial2.data))
 
@@ -106,8 +101,6 @@ def test_quadratic_random():
 
 def test_quadratic_printing():
     quadratic = Quadratic(seed=SEED, N=11)
-    print(str(quadratic))
-    print(repr(quadratic))
     for s in ['N=11', 'rand_factor=1.0']:
         assert s in str(quadratic)
 
@@ -123,7 +116,6 @@ def test_quadratic_seeding():
     for i, j in zip(quadratic1.a, quadratic2.a):
         assert abs(i - j) < TOLERANCE
 
-    print(quadratic1.data, quadratic2.data)
 
     assert all(np.array_equal(i, j) for i, j in zip(quadratic1.data, quadratic2.data))
 
@@ -154,7 +146,6 @@ def test_cubic_random():
 
     cubic = Cubic(seed=SEED, N=7, xlim=(-3, 3))
     x, y = cubic.data
-    print(cubic.a)
 
     for i, j in zip(cubic.a, [0.13858659, 0.35275832]):
         assert abs(i - j) < TOLERANCE
@@ -168,8 +159,6 @@ def test_cubic_random():
 
 def test_cubic_printing():
     cubic = Cubic(seed=SEED, N=11)
-    print(str(cubic))
-    print(repr(cubic))
     for s in ['N=11', 'rand_factor=5.0']:
         assert s in str(cubic)
 
@@ -184,8 +173,6 @@ def test_cubic_seeding():
     assert cubic1 != cubic2
     for i, j in zip(cubic1.a, cubic2.a):
         assert abs(i - j) < TOLERANCE
-
-    print(cubic1.data, cubic2.data)
 
     assert all(np.array_equal(i, j) for i, j in zip(cubic1.data, cubic2.data))
 

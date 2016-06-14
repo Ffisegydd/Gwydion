@@ -30,7 +30,6 @@ def test_normal_random():
 
     normal = Normal(seed=SEED, N=7, xlim=(-3, 3))
     x, y = normal.data
-    print(y)
 
     assert normal.mu == -0.07669283956815831
     assert normal.sigma == 0.4079253407297965

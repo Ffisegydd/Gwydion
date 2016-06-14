@@ -59,8 +59,6 @@ def test_logarithm_seeding():
     assert log1.I == log2.I
     assert log1.k == log2.k
 
-    print(log1.data, log2.data)
-
     assert all(np.array_equal(i, j) for i, j in zip(log1.data, log2.data))
 
 def test_logarithm_exceptions():

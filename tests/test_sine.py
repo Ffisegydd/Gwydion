@@ -62,8 +62,6 @@ def test_sine_seeding():
     assert sine1.f == sine2.f
     assert sine1.p == sine2.p
 
-    print(sine1.data, sine2.data)
-
     assert all(np.array_equal(i, j) for i, j in zip(sine1.data, sine2.data))
 
 def test_sine_exceptions():
