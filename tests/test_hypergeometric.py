@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gwydion import Hypergeometric
+from gwydion.stats import Hypergeometric
 from gwydion.exceptions import GwydionError
 
 

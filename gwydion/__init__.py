@@ -6,10 +6,11 @@ from gwydion.funcs.logarithm import Logarithm
 from gwydion.funcs.polynomial import Polynomial, Quadratic, Cubic
 from gwydion.funcs.sine import Sine
 
-from gwydion.stats.normal import Normal
-from gwydion.stats.poisson import Poisson
-from gwydion.stats.hypergeometric import Hypergeometric
-from gwydion.stats.binomial import Binomial
+import gwydion.stats
+# from gwydion.stats.normal import Normal
+# from gwydion.stats.poisson import Poisson
+# from gwydion.stats.hypergeometric import Hypergeometric
+# from gwydion.stats.binomial import Binomial
 
 from .random_array import RandomArray
 

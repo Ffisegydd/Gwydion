@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gwydion import Normal
+from gwydion.stats import Normal
 from gwydion.exceptions import GwydionError
 
 

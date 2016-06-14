@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gwydion import Poisson
+from gwydion.stats import Poisson
 from gwydion.exceptions import GwydionError
 
 

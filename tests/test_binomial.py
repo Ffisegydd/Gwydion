@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from gwydion import Binomial
+from gwydion.stats import Binomial
 from gwydion.exceptions import GwydionError
 
 
