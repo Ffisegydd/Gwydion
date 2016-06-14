@@ -75,7 +75,7 @@ class Poisson(DiscreteProbDist, ProbDist, Base):
 
     def sample(self, N=None):
         lam = self.lam
-        return poisson(lam).rvs(size=N)
+        return poisson(lam).rvs(size=N, random_state=self.random)
 
     @property
     def mean(self):

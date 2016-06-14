@@ -83,7 +83,7 @@ class Hypergeometric(DiscreteProbDist, ProbDist, Base):
         return hypergeom(self.M, self.X, self.m).pmf(x)
 
     def sample(self, x=None):
-        return hypergeom(self.M, self.X, self.m).rvs(x)
+        return hypergeom(self.M, self.X, self.m).rvs(x, random_state=self.random)
 
     @property
     def mean(self):

@@ -82,7 +82,7 @@ class Binomial(DiscreteProbDist, ProbDist, Base):
         return binom(self.n, self.p).pmf(x)
 
     def sample(self, N=None):
-        return binom(self.n, self.p).rvs(N)
+        return binom(self.n, self.p).rvs(N, random_state=self.random)
 
     @property
     def mean(self):

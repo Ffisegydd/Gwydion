@@ -51,6 +51,19 @@ def test_hyper_variables():
     assert hyper.skewness == 0
 
 
+def test_hyper_sampling():
+
+    hyper = Hypergeometric(seed=SEED, N=7, xlim=(0, 20))
+
+    single = hyper.sample()
+    assert single == 10
+
+    sample = hyper.sample(7)
+    test = [12, 11, 9, 7, 10, 8, 9]
+    for i, j in zip(sample, test):
+        assert abs(i - j) < TOLERANCE
+
+
 def test_hyper_printing():
     hyper = Hypergeometric(seed=SEED, N=11)
 

@@ -51,6 +51,19 @@ def test_poisson_variables():
     assert poisson.skewness == 0.31011025029450545
 
 
+def test_poisson_sampling():
+
+    poisson = Poisson(seed=SEED, N=7, xlim=(0, 10))
+
+    single = poisson.sample()
+    assert single == 12
+
+    sample = poisson.sample(7)
+    test = [8, 7, 12, 8, 11, 8, 14]
+    for i, j in zip(sample, test):
+        assert abs(i - j) < TOLERANCE
+
+
 def test_poisson_printing():
     poisson = Poisson(seed=SEED, N=11)
 

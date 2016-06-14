@@ -52,6 +52,19 @@ def test_binom_variables():
     assert binom.skewness == -0.26086267115548145
 
 
+def test_binom_sampling():
+
+    binom = Binomial(seed=SEED, N=7, xlim=(0, 20))
+
+    single = binom.sample()
+    assert single == 8
+
+    sample = binom.sample(7)
+    test = [9, 7, 9, 8, 10, 8, 8]
+    for i, j in zip(sample, test):
+        assert abs(i - j) < TOLERANCE
+
+
 def test_binom_printing():
     binom = Binomial(seed=SEED, N=11)
 
