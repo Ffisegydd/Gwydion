@@ -58,9 +58,11 @@ class Binomial(DiscreteProbDist, ProbDist, Base):
 
     def set_variables(self, n, p):
 
-        for var in [n, p]:
-            if var is not None and not isinstance(var,  int):
-                raise GwydionError('Variables must be either int, or None.')
+        if n is not None and not isinstance(n,  int):
+            raise GwydionError('Variables must be either int, or None.')
+
+        if p is not None and not isinstance(p, (int, float)):
+            raise GwydionError('Variables must be either int, or None.')
 
         defaults = {
             'n': self.random.random_integers(10, 50),

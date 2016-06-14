@@ -41,6 +41,17 @@ def test_normal_random():
         assert abs(i - j) < TOLERANCE
 
 
+def test_normal_variables():
+
+    normal = Normal(seed=SEED, N=7, xlim=(-3, 3))
+
+    assert normal.mean == -0.07669283956815831
+    assert normal.median == -0.07669283956815831
+    assert normal.mode == -0.07669283956815831
+    assert normal.variance == 0.16640308360952058
+    assert normal.skewness == 0
+
+
 def test_normal_printing():
     normal = Normal(seed=SEED, N=11)
 

@@ -40,6 +40,17 @@ def test_poisson_random():
         assert abs(i - j) < TOLERANCE
 
 
+def test_poisson_variables():
+
+    poisson = Poisson(seed=SEED, N=7, xlim=(-3, 3))
+
+    assert poisson.mean == 10.398429625910502
+    assert poisson.median == 10
+    assert poisson.mode == 10
+    assert poisson.variance == 10.398429625910502
+    assert poisson.skewness == 0.31011025029450545
+
+
 def test_poisson_printing():
     poisson = Poisson(seed=SEED, N=11)
 

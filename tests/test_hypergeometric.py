@@ -41,6 +41,15 @@ def test_hyper_random():
     for i, j in zip(y, y_test):
         assert abs(i - j) < TOLERANCE
 
+def test_hyper_variables():
+
+    hyper = Hypergeometric(seed=SEED, N=7, xlim=(0, 20))
+
+    assert hyper.mean == 9.375
+    assert hyper.mode == 9
+    assert hyper.variance == 1
+    assert hyper.skewness == 0
+
 
 def test_hyper_printing():
     hyper = Hypergeometric(seed=SEED, N=11)
