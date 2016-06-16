@@ -8,7 +8,7 @@ class Gamma(ProbDist, Base):
     """
     Gamma function. Returned function is
 
-        y = (x**k-1 * exp(-x/theta))/(theta**k * Gamma(k))
+        y = (lam**k * x**k-1 * exp(-x*lam))/Gamma(k)
 
     where Gamma is the Gamma function.
 
@@ -19,8 +19,8 @@ class Gamma(ProbDist, Base):
         Length of arrays to be returned via the data method. Defaults to 100.
     k : Float, integer, or None.
         Shape parameter. If none, defaults to a random value between 0 and 10.
-    theta : Float, integer, or None.
-        Scale parameter. If none, defaults to a random value between 0 and 30.
+    lam : Float, integer, or None.
+        Rate parameter. If none, defaults to a random value between 0 and 30.
     xlim : Tuple of floats or integers, or None.
         (Min, Max) values for the x-data. If None, defaults to (0, 30).
     rand_factor : Float or integer.
@@ -33,31 +33,31 @@ class Gamma(ProbDist, Base):
 
     >>>> Gamma()  # Default params, returns a random poisson distribution.
     >>>> Gamma(N=1000)  # Increase the number of data points.
-    >>>> Gamma(k=1, theta=10)  # Setting k=1 returns the Exponential distribution with theta=1/lambda.
+    >>>> Gamma(k=1, lam=10)  # Setting k=1 returns the Exponential distribution with lam the rate parameter.
     >>>> Gamma(rand_factor=None)  # Turn off randomness.
     >>>> Gamma(seed=1234)  # Seeded RNG.
     """
 
 
-    def __init__(self, N=100, k=None, theta=None, xlim=None, rand_factor=0.01, seed=None):
+    def __init__(self, N=100, k=None, lam=None, xlim=None, rand_factor=0.01, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
                          rand_factor=rand_factor,
                          seed=seed)
 
-        self.set_variables(k, theta)
+        self.set_variables(k, lam)
 
-    def set_variables(self, k, theta):
+    def set_variables(self, k, lam):
 
         if k is not None and not isinstance(k,  int):
             raise GwydionError('Variables must be either int, or None.')
 
-        if theta is not None and not isinstance(theta, (int, float)):
+        if lam is not None and not isinstance(lam, (int, float)):
             raise GwydionError('Variables must be either int, or None.')
 
         defaults = {
             'k': self.random.rand() * 20,
-            'theta': self.random.rand() * 2
+            'lam': self.random.rand()
         }
 
         for key, val in defaults.items():
@@ -70,23 +70,23 @@ class Gamma(ProbDist, Base):
             self.xlim = (0, 30 + (self.random.rand()-0.5) * 10)
 
     def func(self, x):
-        return gamma(self.k, scale=self.theta).pdf(x)
+        return gamma(self.k, scale=1.0/self.lam).pdf(x)
 
     def sample(self, N=None):
-        return gamma(self.k, scale=self.theta).rvs(N, random_state=self.random)
+        return gamma(self.k, scale=1.0/self.lam).rvs(N, random_state=self.random)
 
     @property
     def mean(self):
-        return self.k*self.theta
+        return self.k*self.lam
 
     @property
     def mode(self):
         if self.k >= 1:
-            return (self.k-1) * self.theta
+            return (self.k-1) * self.lam
 
     @property
     def variance(self):
-        return self.k * self.theta**2
+        return self.k * self.lam**2
 
     @property
     def skewness(self):
