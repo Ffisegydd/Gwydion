@@ -163,8 +163,5 @@ class DiscreteProbDist(object):
                 self._x = np.unique(np.linspace(*self.xlim, num=self.N).astype('int'))
             except Exception as e:
                 raise GwydionError('Unable to create x-data.') from e
-        if self.N != self._x.size:
-            self.N = self._x.size
-            self._x = np.unique(np.linspace(*self.xlim, num=self.N).astype('int'))
 
         return self._x
