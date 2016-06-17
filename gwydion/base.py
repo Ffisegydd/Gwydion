@@ -24,8 +24,6 @@ class Base(ABC):
         Length of arrays to be returned via the data method.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data.
-    rand : Boolean.
-        Choose whether the y values should have some random numbers added to them. Defaults to True.
     rand : Float or integer.
         The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.5.
     seed : Integer or None.
