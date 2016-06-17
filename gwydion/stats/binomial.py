@@ -79,7 +79,7 @@ class Binomial(DiscreteProbDist):
         if self.xlim is None:
             self.xlim = (0, self.n)
         if self.N > (self.xlim[1]-self.xlim[0]):
-            self.N = self.xlim[1] - self.xlim[0]
+            self.N = 1 + self.xlim[1] - self.xlim[0]
 
     def func(self, x):
         return binom(self.n, self.p).pmf(x)

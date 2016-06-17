@@ -72,7 +72,7 @@ class Geometric(DiscreteProbDist):
         if self.xlim is None:
             self.xlim = (0, ceil(5/self.p))
         if self.N > (self.xlim[1]-self.xlim[0]):
-            self.N = self.xlim[1] - self.xlim[0]
+            self.N = 1 + self.xlim[1] - self.xlim[0]
 
     def func(self, x):
         p = self.p

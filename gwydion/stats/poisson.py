@@ -72,7 +72,7 @@ class Poisson(DiscreteProbDist):
         if self.xlim is None:
             self.xlim = (0, ceil(self.lam*3))
         if self.N > (self.xlim[1]-self.xlim[0]):
-            self.N = self.xlim[1] - self.xlim[0]
+            self.N = 1 + self.xlim[1] - self.xlim[0]
 
     def func(self, x):
         lam = self.lam
