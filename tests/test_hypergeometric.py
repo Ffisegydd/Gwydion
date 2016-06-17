@@ -14,7 +14,7 @@ def test_hyper_creation():
 
 
 def test_hyper_non_random():
-    hyper = Hypergeometric(rand_factor=None, M=100, m=20, X=40, xlim=(0,20), N=7)
+    hyper = Hypergeometric(rand=None, M=100, m=20, X=40, xlim=(0,20), N=7)
     x, y = hyper.data
 
     for i, j in zip(x, [0, 3, 6, 10, 13, 16, 20]):
@@ -67,10 +67,10 @@ def test_hyper_sampling():
 def test_hyper_printing():
     hyper = Hypergeometric(seed=SEED, N=11)
 
-    for s in ['N=11', 'rand_factor=0.01']:
+    for s in ['N=11', 'rand=0.01']:
         assert s in str(hyper)
 
-    for s in ['N=11', 'xlim=(0, 15)', 'seed=31415927', 'M=24', 'X=15', 'm=15', 'rand_factor=0.01']:
+    for s in ['N=11', 'xlim=(0, 15)', 'seed=31415927', 'M=24', 'X=15', 'm=15', 'rand=0.01']:
         assert s in repr(hyper)
 
 

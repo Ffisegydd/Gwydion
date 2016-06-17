@@ -6,10 +6,10 @@ from gwydion.exceptions import GwydionError
 #TODO Not happy with this mock testing process.
 
 class MockBaseClass(Base):
-    def __init__(self, N=100, a=None, b=None, xlim=(0, 10), add_rand=True, rand_factor=0.5, seed=None):
+    def __init__(self, N=100, a=None, b=None, xlim=(0, 10), add_rand=True, rand=0.5, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
+                         rand=rand,
                          seed=seed)
 
         self.set_variables(a, b)

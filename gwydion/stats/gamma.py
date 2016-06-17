@@ -4,7 +4,7 @@ from gwydion.base import np, Base, ProbDist, DiscreteProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Gamma(ProbDist, Base):
+class Gamma(ProbDist):
     """
     Gamma function. Returned function is
 
@@ -23,7 +23,7 @@ class Gamma(ProbDist, Base):
         Rate parameter. If none, defaults to a random value between 0 and 30.
     xlim : Tuple of floats or integers, or None.
         (Min, Max) values for the x-data. If None, defaults to (0, 30).
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.02.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -34,16 +34,17 @@ class Gamma(ProbDist, Base):
     >>>> Gamma()  # Default params, returns a random poisson distribution.
     >>>> Gamma(N=1000)  # Increase the number of data points.
     >>>> Gamma(k=1, lam=10)  # Setting k=1 returns the Exponential distribution with lam the rate parameter.
-    >>>> Gamma(rand_factor=None)  # Turn off randomness.
+    >>>> Gamma(rand=None)  # Turn off randomness.
     >>>> Gamma(seed=1234)  # Seeded RNG.
     """
 
 
-    def __init__(self, N=100, k=None, lam=None, xlim=None, rand_factor=0.01, seed=None):
+    def __init__(self, N=100, k=None, lam=None, xlim=None, rand=0.01, seed=None, allow_negative_y=True):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
-                         seed=seed)
+                         rand=rand,
+                         seed=seed,
+                         allow_negative_y=allow_negative_y)
 
         self.set_variables(k, lam)
 

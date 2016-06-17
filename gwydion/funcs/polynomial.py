@@ -17,7 +17,7 @@ class Polynomial(Base):
         Parameters for the polynomial. If None, defaults to either a quadratic or cubic with randomish values.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 1.0.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -29,14 +29,14 @@ class Polynomial(Base):
     >>>> Polynomial(N=1000)  # Increase the number of data points.
     >>>> Polynomial(a=[0])  # Horizontal line
     >>>> Polynomial(a=[0, 0, 2])  # Simple quadratic.
-    >>>> Polynomial(rand_factor=None)  # Turn off randomness.
+    >>>> Polynomial(rand=None)  # Turn off randomness.
     >>>> Polynomial(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, a=None, xlim=(-10, 10), rand_factor=1.0, seed=None):
+    def __init__(self, N=100, a=None, xlim=(-10, 10), rand=1.0, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
+                         rand=rand,
                          seed=seed)
 
         self.set_variables(a)
@@ -80,7 +80,7 @@ class Quadratic(Polynomial):
         (Min, Max) values for the x-data. Defaults to (-10, 10).
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 1.0.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -91,11 +91,11 @@ class Quadratic(Polynomial):
     >>>> Quadratic()  # Default params, returns a "normal" exponential.
     >>>> Quadratic(N=1000)  # Increase the number of data points.
     >>>> Quadratic(a=0, b=0, c=0)  # Horizontal line
-    >>>> Quadratic(rand_factor=None)  # Turn off randomness.
+    >>>> Quadratic(rand=None)  # Turn off randomness.
     >>>> Quadratic(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, a=None, b=None, c=None, xlim=(-10, 10), rand_factor=1.0, seed=None):
+    def __init__(self, N=100, a=None, b=None, c=None, xlim=(-10, 10), rand=1.0, seed=None):
 
         args = [c, b, a]
         if all(arg is None for arg in args):
@@ -106,7 +106,7 @@ class Quadratic(Polynomial):
         super().__init__(N=N,
                          a=args,
                          xlim=xlim,
-                         rand_factor=rand_factor,
+                         rand=rand,
                          seed=seed)
 
 
@@ -133,7 +133,7 @@ class Cubic(Polynomial):
         (Min, Max) values for the x-data. Defaults to (-10, 10).
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 5.0.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -144,11 +144,11 @@ class Cubic(Polynomial):
     >>>> Cubic()  # Default params, returns a "normal" exponential.
     >>>> Cubic(N=1000)  # Increase the number of data points.
     >>>> Cubic(a=0, b=0, c=0, d=0)  # Horizontal line
-    >>>> Cubic(rand_factor=None)  # Turn off randomness.
+    >>>> Cubic(rand=None)  # Turn off randomness.
     >>>> Cubic(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, a=None, b=None, c=None, d=None, xlim=(-10, 10), rand_factor=5.0, seed=None):
+    def __init__(self, N=100, a=None, b=None, c=None, d=None, xlim=(-10, 10), rand=5.0, seed=None):
 
         args = [d, c, b, a]
         if all(arg is None for arg in args):
@@ -159,5 +159,5 @@ class Cubic(Polynomial):
         super().__init__(N=N,
                          a=args,
                          xlim=xlim,
-                         rand_factor=rand_factor,
+                         rand=rand,
                          seed=seed)

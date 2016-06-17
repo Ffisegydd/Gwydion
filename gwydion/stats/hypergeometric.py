@@ -4,7 +4,7 @@ from gwydion.base import np, Base, ProbDist, DiscreteProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Hypergeometric(DiscreteProbDist, ProbDist, Base):
+class Hypergeometric(DiscreteProbDist):
     """
     Hypergeometric function. Returned function is
 
@@ -25,7 +25,7 @@ class Hypergeometric(DiscreteProbDist, ProbDist, Base):
         Number of events. If none, defaults to a random value between 0 and 30.
     xlim : Tuple of floats or integers, or None.
         (Min, Max) values for the x-data. If None, defaults to (mu - 5*sigma, mu + 5*sigma).
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.02.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -45,16 +45,17 @@ class Hypergeometric(DiscreteProbDist, ProbDist, Base):
     >>>> Hypergeometric()  # Default params, returns a random poisson distribution.
     >>>> Hypergeometric(N=1000)  # Increase the number of data points.
     >>>> Hypergeometric(M=100, X=50)  # Setting the population and success sizes to 100 and 50, respectively.
-    >>>> Hypergeometric(rand_factor=None)  # Turn off randomness.
+    >>>> Hypergeometric(rand=None)  # Turn off randomness.
     >>>> Hypergeometric(seed=1234)  # Seeded RNG.
     """
 
 
-    def __init__(self, N=100, M=None, m=None, X=None, xlim=None, rand_factor=0.01, seed=None):
+    def __init__(self, N=100, M=None, m=None, X=None, xlim=None, rand=0.01, seed=None, allow_negative_y=True):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
-                         seed=seed)
+                         rand=rand,
+                         seed=seed,
+                         allow_negative_y=allow_negative_y)
 
         self.set_variables(M, m, X)
 

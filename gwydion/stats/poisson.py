@@ -1,10 +1,12 @@
+from math import ceil
+
 from scipy.stats import poisson
 
 from gwydion.base import np, Base, ProbDist, DiscreteProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Poisson(DiscreteProbDist, ProbDist, Base):
+class Poisson(DiscreteProbDist):
     """
     Poisson function. Returned function is
 
@@ -19,7 +21,7 @@ class Poisson(DiscreteProbDist, ProbDist, Base):
         Expected number of events in an interval. If none, defaults to a random value between 0 and 30.
     xlim : Tuple of floats or integers, or None.
         (Min, Max) values for the x-data. If None, defaults to (mu - 5*sigma, mu + 5*sigma).
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.02.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -39,16 +41,17 @@ class Poisson(DiscreteProbDist, ProbDist, Base):
     >>>> Poisson()  # Default params, returns a random poisson distribution.
     >>>> Poisson(N=1000)  # Increase the number of data points.
     >>>> Poisson(lam=10)  # Setting the number of events expected in an interval to 10.
-    >>>> Poisson(rand_factor=None)  # Turn off randomness.
+    >>>> Poisson(rand=None)  # Turn off randomness.
     >>>> Poisson(seed=1234)  # Seeded RNG.
     """
 
 
-    def __init__(self, N=100, lam=None, xlim=None, rand_factor=0.01, seed=None):
+    def __init__(self, N=100, lam=None, xlim=None, rand=0.01, seed=None, allow_negative_y=True):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
-                         seed=seed)
+                         rand=rand,
+                         seed=seed,
+                         allow_negative_y=allow_negative_y)
 
         self.set_variables(lam)
 
@@ -67,7 +70,7 @@ class Poisson(DiscreteProbDist, ProbDist, Base):
                 setattr(self, key, locals()[key])
 
         if self.xlim is None:
-            self.xlim = (0, self.lam*3)
+            self.xlim = (0, ceil(self.lam*3))
         if self.N > (self.xlim[1]-self.xlim[0]):
             self.N = self.xlim[1] - self.xlim[0]
 

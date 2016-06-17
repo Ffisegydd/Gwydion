@@ -14,7 +14,7 @@ def test_sine_creation():
 
 
 def test_sine_non_random():
-    sine = Sine(rand_factor=None, f=0.7, I=2, p=0.0, xlim=(0, 5), N=6)
+    sine = Sine(rand=None, f=0.7, I=2, p=0.0, xlim=(0, 5), N=6)
     x, y = sine.data
 
     for i, j in zip(x, [0, 1, 2, 3, 4, 5]):
@@ -45,11 +45,11 @@ def test_sine_random():
 def test_sine_printing():
     sine = Sine(seed=SEED, N=11)
 
-    for s in ['N=11', 'rand_factor=0.1']:
+    for s in ['N=11', 'rand=0.1']:
         assert s in str(sine)
 
     for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'I=0.9233071604318417',
-              'f=1.315850681459593', 'p=0.1294689021043104', 'rand_factor=0.1']:
+              'f=1.315850681459593', 'p=0.1294689021043104', 'rand=0.1']:
         assert s in repr(sine)
 
 

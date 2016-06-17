@@ -13,7 +13,7 @@ def test_logarithm_creation():
     assert log
 
 def test_logarithm_non_random():
-    log = Logarithm(rand_factor=None, k=2.5, I=2, xlim=(1,6), N=6)
+    log = Logarithm(rand=None, k=2.5, I=2, xlim=(1,6), N=6)
     x, y = log.data
 
     for i, j in zip(x, [1, 2, 3, 4, 5, 6]):
@@ -43,11 +43,11 @@ def test_logarithm_random():
 def test_logarithm_printing():
     log = Logarithm(seed=SEED, N=11)
 
-    for s in ['N=11', 'rand_factor=0.1']:
+    for s in ['N=11', 'rand=0.1']:
         assert s in str(log)
 
     for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'I=0.9233071604318417',
-              'base=2.718281828459045', 'k=0.15792534072979653', 'rand_factor=0.1']:
+              'base=2.718281828459045', 'k=0.15792534072979653', 'rand=0.1']:
         assert s in repr(log)
 
 

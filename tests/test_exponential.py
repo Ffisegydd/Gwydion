@@ -13,7 +13,7 @@ def test_exponential_creation():
     assert exp
 
 def test_exponential_non_random():
-    exp = Exponential(rand_factor=None, k=-2.5, I=2, xlim=(0,5), N=6)
+    exp = Exponential(rand=None, k=-2.5, I=2, xlim=(0,5), N=6)
     x, y = exp.data
 
     for i, j in zip(x, [0, 1, 2, 3, 4, 5]):
@@ -43,11 +43,11 @@ def test_exponential_random():
 def test_exponential_printing():
     exp = Exponential(seed=SEED, N=11)
 
-    for s in ['N=11', 'rand_factor=0.1']:
+    for s in ['N=11', 'rand=0.1']:
         assert s in str(exp)
 
     for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'I=0.9233071604318417',
-              'base=2.718281828459045', 'k=0.15792534072979653', 'rand_factor=0.1']:
+              'base=2.718281828459045', 'k=0.15792534072979653', 'rand=0.1']:
         assert s in repr(exp)
 
 

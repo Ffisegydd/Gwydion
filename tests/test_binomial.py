@@ -14,7 +14,7 @@ def test_binom_creation():
 
 
 def test_binom_non_random():
-    binom = Binomial(rand_factor=None, n=10, p=0.05, xlim=(0,10), N=7)
+    binom = Binomial(rand=None, n=10, p=0.05, xlim=(0,10), N=7)
     x, y = binom.data
 
     for i, j in zip(x, [0, 1, 3, 5, 6, 8, 10]):
@@ -68,10 +68,10 @@ def test_binom_sampling():
 def test_binom_printing():
     binom = Binomial(seed=SEED, N=11)
 
-    for s in ['N=11', 'rand_factor=0.01']:
+    for s in ['N=11', 'rand=0.01']:
         assert s in str(binom)
 
-    for s in ['N=11', 'xlim=(0, 14)', 'seed=31415927', 'n=14', 'p=0.7192932971412341', 'rand_factor=0.01']:
+    for s in ['N=11', 'xlim=(0, 14)', 'seed=31415927', 'n=14', 'p=0.7192932971412341', 'rand=0.01']:
         assert s in repr(binom)
 
 

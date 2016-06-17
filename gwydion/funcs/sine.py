@@ -21,7 +21,7 @@ class Sine(Base):
         Phase of sine wave. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.1.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -32,15 +32,15 @@ class Sine(Base):
     >>>> Sine()  # Default params.
     >>>> Sine(N=1000)  # Increase the number of data points.
     >>>> Sine(I=0.1, p=1.0)  # Modify the function parameters.
-    >>>> Sine(rand_factor=None)  # Turn off randomness.
+    >>>> Sine(rand=None)  # Turn off randomness.
     >>>> Sine(seed=1234)  # Seeded RNG
 
     """
 
-    def __init__(self, N=100, I=None, f=None, p=None, xlim=(-10, 10), rand_factor=0.1, seed=None):
+    def __init__(self, N=100, I=None, f=None, p=None, xlim=(-10, 10), rand=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
+                         rand=rand,
                          seed=seed)
 
         self.set_variables(I, f, p)

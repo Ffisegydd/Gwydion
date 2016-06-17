@@ -14,7 +14,7 @@ def test_polynomial_creation():
 
 
 def test_polynomial_non_random():
-    polynomial = Polynomial(rand_factor=None, a=[0, 1, 2] , xlim=(-3, 3), N=7)
+    polynomial = Polynomial(rand=None, a=[0, 1, 2] , xlim=(-3, 3), N=7)
     x, y = polynomial.data
 
     for i, j in zip(x, [-3, -2, -1, 0, 1, 2, 3]):
@@ -43,10 +43,10 @@ def test_polynomial_random():
 
 def test_polynomial_printing():
     polynomial = Polynomial(seed=SEED, N=11)
-    for s in ['N=11', 'rand_factor=1.0']:
+    for s in ['N=11', 'rand=1.0']:
         assert s in str(polynomial)
 
-    for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'a=[ 0.13858659  0.35275832]', 'rand_factor=1.0']:
+    for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'a=[ 0.13858659  0.35275832]', 'rand=1.0']:
         assert s in repr(polynomial)
 
 
@@ -74,8 +74,8 @@ def test_quadratic_creation():
 
 
 def test_quadratic_non_random():
-    quadratic = Quadratic(rand_factor=None, a=2, b=1, c=0, xlim=(-3, 3), N=7)
-    polynomial = Polynomial(rand_factor=None, a=[0, 1, 2], xlim=(-3, 3), N=7)
+    quadratic = Quadratic(rand=None, a=2, b=1, c=0, xlim=(-3, 3), N=7)
+    polynomial = Polynomial(rand=None, a=[0, 1, 2], xlim=(-3, 3), N=7)
 
     for u, v in zip(quadratic.data, polynomial.data):
         for i, j in zip(u, v):
@@ -101,10 +101,10 @@ def test_quadratic_random():
 
 def test_quadratic_printing():
     quadratic = Quadratic(seed=SEED, N=11)
-    for s in ['N=11', 'rand_factor=1.0']:
+    for s in ['N=11', 'rand=1.0']:
         assert s in str(quadratic)
 
-    for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'a=[ 0.13858659  0.35275832]', 'rand_factor=1.0']:
+    for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'a=[ 0.13858659  0.35275832]', 'rand=1.0']:
         assert s in repr(quadratic)
 
 
@@ -132,8 +132,8 @@ def test_cubic_creation():
 
 
 def test_cubic_non_random():
-    cubic = Cubic(rand_factor=None, a=2, b=1, c=0, d=-1, xlim=(-3, 3), N=7)
-    polynomial = Polynomial(rand_factor=None, a=[-1, 0, 1, 2], xlim=(-3, 3), N=7)
+    cubic = Cubic(rand=None, a=2, b=1, c=0, d=-1, xlim=(-3, 3), N=7)
+    polynomial = Polynomial(rand=None, a=[-1, 0, 1, 2], xlim=(-3, 3), N=7)
 
     for u, v in zip(cubic.data, polynomial.data):
         for i, j in zip(u, v):
@@ -159,10 +159,10 @@ def test_cubic_random():
 
 def test_cubic_printing():
     cubic = Cubic(seed=SEED, N=11)
-    for s in ['N=11', 'rand_factor=5.0']:
+    for s in ['N=11', 'rand=5.0']:
         assert s in str(cubic)
 
-    for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'a=[ 0.13858659  0.35275832]', 'rand_factor=5.0']:
+    for s in ['N=11', 'xlim=(-10, 10)', 'seed=31415927', 'a=[ 0.13858659  0.35275832]', 'rand=5.0']:
         assert s in repr(cubic)
 
 

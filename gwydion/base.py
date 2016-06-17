@@ -26,13 +26,13 @@ class Base(ABC):
         (Min, Max) values for the x-data.
     rand : Boolean.
         Choose whether the y values should have some random numbers added to them. Defaults to True.
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If rand=False, has no use. Defaults to 0.5.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
     """
 
-    def __init__(self, N, xlim, rand_factor, seed):
+    def __init__(self, N, xlim, rand, seed):
         super().__init__()
 
         self.N = N
@@ -48,13 +48,13 @@ class Base(ABC):
             raise GwydionError('Setting the random seed has failed.') from e
 
         self.xlim = xlim
-        self.rand_factor = rand_factor if rand_factor is not None else 0
+        self.rand = rand if rand is not None else 0
 
     @property
     def r(self):
         if self._r is None:
             try:
-                self._r = self.rand_factor * (2 * self.random.rand(self.N) - 1)
+                self._r = self.rand * (2 * self.random.rand(self.N) - 1)
             except Exception as e:
                 raise GwydionError('Unable to create randomised data.') from e
 
@@ -103,7 +103,7 @@ class Base(ABC):
         pass
 
     def __str__(self):
-        s = '<{s.__class__.__name__} : N={s.N}, rand_factor={s.rand_factor}>'
+        s = '<{s.__class__.__name__} : N={s.N}, rand={s.rand}>'
         return s.format(s=self)
 
     def __repr__(self):
@@ -123,7 +123,29 @@ class Base(ABC):
         super().__setattr__(name, value)
 
 
-class ProbDist(object):
+class ProbDist(Base):
+
+    def __init__(self, N, xlim, rand, seed, allow_negative_y=True):
+        self.allow_negative_y = allow_negative_y
+
+        super().__init__(N=N,
+                         xlim=xlim,
+                         rand=rand,
+                         seed=seed)
+
+    @property
+    def y(self):
+        if self._y is None:
+            try:
+                self._y = self.func(self.x)
+            except Exception as e:
+                raise GwydionError('Unable to create y-data.') from e
+
+        y = self._y + self.r
+        if not self.allow_negative_y:
+            y[y<0] = 0
+
+        return y
 
     def to_cum(self):
         new = deepcopy(self)
@@ -154,7 +176,7 @@ class ProbDist(object):
         return NotImplemented()
 
 
-class DiscreteProbDist(object):
+class DiscreteProbDist(ProbDist):
 
     @property
     def x(self):

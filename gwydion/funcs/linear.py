@@ -19,7 +19,7 @@ class Linear(Base):
         y-intercept of straight line function. If None, defaults to a randomised "typical" value.
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (0, 10).
-    rand_factor : Float or integer.
+    rand : Float or integer.
         TThe amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.5.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -30,14 +30,14 @@ class Linear(Base):
     >>>> Linear()  # Default params, returns a "normal" straight line.
     >>>> Linear(N=1000)  # Increase the number of data points.
     >>>> Linear(m=0, c=0)  # Horizontal line with randomness
-    >>>> Linear(rand_factor=None)  # Turn off randomness.
+    >>>> Linear(rand=None)  # Turn off randomness.
     >>>> Linear(seed=1234)  # Seeded RNG
     """
 
-    def __init__(self, N=100, m=None, c=None, xlim=(0, 10), rand_factor=0.5, seed=None):
+    def __init__(self, N=100, m=None, c=None, xlim=(0, 10), rand=0.5, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
+                         rand=rand,
                          seed=seed)
 
         self.set_variables(m, c)

@@ -14,7 +14,7 @@ def test_poisson_creation():
 
 
 def test_poisson_non_random():
-    poisson = Poisson(rand_factor=None, lam=2, xlim=(0,10), N=7)
+    poisson = Poisson(rand=None, lam=2, xlim=(0,10), N=7)
     x, y = poisson.data
 
     for i, j in zip(x, [0, 1, 3, 5, 6, 8, 10]):
@@ -67,10 +67,10 @@ def test_poisson_sampling():
 def test_poisson_printing():
     poisson = Poisson(seed=SEED, N=11)
 
-    for s in ['N=11', 'rand_factor=0.01']:
+    for s in ['N=11', 'rand=0.01']:
         assert s in str(poisson)
 
-    for s in ['N=11', 'xlim=(0, 31.195288877731507)', 'seed=31415927', 'lam=10.398429625910502', 'rand_factor=0.01']:
+    for s in ['N=11', 'xlim=(0, 31.195288877731507)', 'seed=31415927', 'lam=10.398429625910502', 'rand=0.01']:
         assert s in repr(poisson)
 
 

@@ -2,7 +2,7 @@ from gwydion.base import np, Base, ProbDist
 from gwydion.exceptions import GwydionError
 
 
-class Normal(ProbDist, Base):
+class Normal(ProbDist):
     """
     Gaussian function. Returned function is
 
@@ -19,7 +19,7 @@ class Normal(ProbDist, Base):
         Width parameter equal to standard deviation. If None, defaults to a random value around 0.0.
     xlim : Tuple of floats or integers, or None.
         (Min, Max) values for the x-data. If None, defaults to (mu - 5*sigma, mu + 5*sigma).
-    rand_factor : Float or integer.
+    rand : Float or integer.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.02.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -30,16 +30,17 @@ class Normal(ProbDist, Base):
     >>>> Normal()  # Default params, returns a "normal" exponential.
     >>>> Normal(N=1000)  # Increase the number of data points.
     >>>> Normal(mu=1, sigma=0.01)  # Tall, thin peak at x=1.
-    >>>> Normal(rand_factor=None)  # Turn off randomness.
+    >>>> Normal(rand=None)  # Turn off randomness.
     >>>> Normal(seed=1234)  # Seeded RNG.
     """
 
 
-    def __init__(self, N=100, mu=None, sigma=None, xlim=None, rand_factor=0.02, seed=None):
+    def __init__(self, N=100, mu=None, sigma=None, xlim=None, rand=0.02, seed=None, allow_negative_y=True):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
-                         seed=seed)
+                         rand=rand,
+                         seed=seed,
+                         allow_negative_y=allow_negative_y)
 
         self.set_variables(mu, sigma)
 

@@ -21,7 +21,7 @@ class Exponential(Base):
         Amplitude of the exponent. If None, defaults to a random value around 0.0
     xlim : Tuple of floats or integers.
         (Min, Max) values for the x-data. Defaults to (-10, 10).
-    rand_factor : Float, integer, or None.
+    rand : Float, integer, or None.
         The amplitude of random numbers added to the y-data. If None, no random data added. Defaults to 0.1.
     seed : Integer or None.
         Used to seed the RNG if repeatable results are required. Defaults to None (and thus no seeding).
@@ -37,10 +37,10 @@ class Exponential(Base):
 
     """
 
-    def __init__(self, N=100, base=None, I=None, k=None, xlim=(-10, 10), rand_factor=0.1, seed=None):
+    def __init__(self, N=100, base=None, I=None, k=None, xlim=(-10, 10), rand=0.1, seed=None):
         super().__init__(N=N,
                          xlim=xlim,
-                         rand_factor=rand_factor,
+                         rand=rand,
                          seed=seed)
 
         self.set_variables(base, I, k)

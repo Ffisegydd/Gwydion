@@ -14,7 +14,7 @@ def test_normal_creation():
 
 
 def test_normal_non_random():
-    normal = Normal(rand_factor=None, mu=0.0, sigma=2, xlim=(-3,3), N=7)
+    normal = Normal(rand=None, mu=0.0, sigma=2, xlim=(-3,3), N=7)
     x, y = normal.data
 
     for i, j in zip(x, [-3, -2, -1, 0, 1, 2, 3]):
@@ -55,11 +55,11 @@ def test_normal_variables():
 def test_normal_printing():
     normal = Normal(seed=SEED, N=11)
 
-    for s in ['N=11', 'rand_factor=0.02']:
+    for s in ['N=11', 'rand=0.02']:
         assert s in str(normal)
 
     for s in ['N=11', 'xlim=(-2.1163195432171413, 1.9629338640808245)', 'seed=31415927', 'mu=-0.07669283956815831',
-              'sigma=0.4079253407297965', 'rand_factor=0.02']:
+              'sigma=0.4079253407297965', 'rand=0.02']:
         assert s in repr(normal)
 
 
